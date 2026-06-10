@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>All Chassis | Adapt Performance Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--black:#0a0a0a;--off-black:#111;--carbon:#1a1a1a;--mid:#2e2e2e;--steel:#3d3d3d;--muted:#888;--light-muted:#aaa;--off-white:#f0ede6;--accent:#c8a84b;--accent-bright:#e8c96a}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--off-white);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;background:rgba(10,10,10,.94);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,168,75,.15)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.12em;color:var(--off-white);text-decoration:none}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--light-muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+.nav-cta{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--black);background:var(--accent);padding:9px 22px;text-decoration:none;transition:background .2s}
+.nav-cta:hover{background:var(--accent-bright)}
+
+.breadcrumb{margin-top:64px;padding:16px 48px;background:var(--off-black);border-bottom:1px solid rgba(200,168,75,.08);display:flex;align-items:center;gap:10px}
+.breadcrumb a,.breadcrumb span{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.breadcrumb a:hover{color:var(--accent)}
+.breadcrumb .sep{color:rgba(200,168,75,.3)}
+.breadcrumb span:last-child{color:var(--accent)}
+
+/* PAGE HERO */
+.page-hero{background:var(--off-black);padding:72px 48px 64px;position:relative;overflow:hidden;border-bottom:1px solid rgba(200,168,75,.1)}
+.page-hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-15deg,transparent 0,transparent 48px,rgba(200,168,75,.025) 48px,rgba(200,168,75,.025) 49px);pointer-events:none}
+.page-hero-inner{position:relative;z-index:1;max-width:700px}
+.eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--accent)}
+.page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,7vw,96px);line-height:.9;letter-spacing:.02em;color:var(--off-white);margin-bottom:20px}
+.page-title em{font-style:normal;color:var(--accent)}
+.page-sub{font-size:15px;font-weight:300;color:var(--light-muted);line-height:1.7;max-width:480px}
+
+/* MAKE FILTER */
+.filter-bar{background:var(--black);padding:0 48px;border-bottom:1px solid rgba(200,168,75,.08);display:flex;gap:0;position:sticky;top:64px;z-index:90}
+.filter-tab{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:18px 28px;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap}
+.filter-tab:hover{color:var(--off-white)}
+.filter-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+
+/* MAKE SECTIONS */
+.makes-content{padding:64px 48px}
+.make-section{margin-bottom:72px}
+.make-section:last-child{margin-bottom:0}
+.make-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(200,168,75,.12)}
+.make-name-large{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:.03em;color:var(--off-white);line-height:1}
+.make-name-large em{font-style:normal;color:var(--accent)}
+.make-count-tag{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+.chassis-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.chassis-card{background:var(--carbon);padding:28px 24px;border:1px solid transparent;transition:border-color .2s,background .2s;text-decoration:none;cursor:pointer;display:block}
+.chassis-card:hover{border-color:rgba(200,168,75,.25);background:var(--mid)}
+.chassis-card-make{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.chassis-card-name{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.04em;color:var(--off-white);line-height:1.05;margin-bottom:10px}
+.chassis-card-engines{font-size:12px;font-weight:300;color:var(--muted);line-height:1.6;margin-bottom:16px;min-height:36px}
+.chassis-card-years{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:500;letter-spacing:.1em;color:rgba(200,168,75,.6);margin-bottom:16px}
+.chassis-card-tags{display:flex;gap:6px;flex-wrap:wrap}
+.chassis-tag{font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:1px solid rgba(255,255,255,.08);padding:3px 8px}
+.chassis-card-arrow{font-size:16px;color:var(--accent);margin-top:16px;opacity:0;transition:opacity .2s,transform .2s}
+.chassis-card:hover .chassis-card-arrow{opacity:1;transform:translateX(4px)}
+
+/* CTA */
+.kit-finder-cta{padding:72px 48px;background:var(--off-black);text-align:center;border-top:1px solid rgba(200,168,75,.1)}
+.cta-title{font-family:'Bebas Neue',sans-serif;font-size:72px;letter-spacing:.03em;color:var(--off-white);line-height:.95;margin-bottom:16px}
+.cta-title em{font-style:normal;color:var(--accent)}
+.cta-sub{font-size:14px;font-weight:300;color:var(--muted);margin-bottom:36px}
+.cta-actions{display:flex;justify-content:center;gap:14px}
+.btn-large{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--black);background:var(--accent);padding:16px 48px;text-decoration:none;display:inline-block;transition:background .2s}
+.btn-large:hover{background:var(--accent-bright)}
+.btn-large-ghost{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--off-white);background:transparent;border:1px solid rgba(255,255,255,.15);padding:16px 48px;text-decoration:none;display:inline-block;transition:border-color .2s,color .2s}
+.btn-large-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+/* FOOTER */
+footer{background:var(--off-black);border-top:1px solid rgba(200,168,75,.15);padding:56px 48px 32px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.12em;color:var(--off-white);margin-bottom:16px}
+.footer-logo span{color:var(--accent)}
+.footer-tagline{font-size:13px;font-weight:300;color:var(--muted);line-height:1.7;max-width:220px;margin-bottom:24px}
+.footer-social{display:flex;gap:12px}
+.social-link{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.social-link:hover{color:var(--accent)}
+.footer-col-title{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a{font-size:13px;font-weight:300;color:var(--muted);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--off-white)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:1px solid rgba(255,255,255,.05)}
+.footer-copy{font-size:12px;font-weight:300;color:rgba(136,136,136,.6)}
+.footer-bottom-links{display:flex;gap:24px;list-style:none}
+.footer-bottom-links a{font-size:12px;font-weight:300;color:rgba(136,136,136,.6);text-decoration:none;transition:color .2s}
+.footer-bottom-links a:hover{color:var(--muted)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="adapt-perform-homepage.html" class="nav-logo">ADAPT <span>PERFORMANCE</span></a>
+  <ul class="nav-links">
+    <li><a href="#" class="active">Chassis</a></li>
+    <li><a href="adapt-service-kits.html">Maintenance</a></li>
+    <li><a href="adapt-fluids.html">Accessories</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="adapt-about.html">About</a></li>
+  </ul>
+  <a href="adapt-perform-homepage.html" class="nav-cta">Find My Kit</a>
+</nav>
+
+<div class="breadcrumb">
+  <a href="adapt-perform-homepage.html">Home</a>
+  <span class="sep">›</span>
+  <span>All Chassis</span>
+</div>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <p class="eyebrow">Browse by Platform</p>
+    <h1 class="page-title">ALL<br><em>CHASSIS.</em></h1>
+    <p class="page-sub">Every kit is spec'd to the platform — oil capacity, viscosity, filter fitment, and drain hardware matched to your specific engine. Select your chassis below.</p>
+  </div>
+</section>
+
+<div class="filter-bar">
+  <div class="filter-tab active" onclick="filterMake('all',this)">All Makes</div>
+  <div class="filter-tab" onclick="filterMake('toyota',this)">Toyota</div>
+  <div class="filter-tab" onclick="filterMake('lexus',this)">Lexus</div>
+  <div class="filter-tab" onclick="filterMake('honda',this)">Honda</div>
+  <div class="filter-tab" onclick="filterMake('subaru',this)">Subaru</div>
+  <div class="filter-tab" onclick="filterMake('bmw',this)">BMW</div>
+</div>
+
+<div class="makes-content">
+
+  <!-- TOYOTA -->
+  <div class="make-section" id="make-toyota">
+    <div class="make-header">
+      <div class="make-name-large">TOYOTA <em>/</em></div>
+      <div class="make-count-tag">7 Chassis</div>
+    </div>
+    <div class="chassis-grid">
+
+      <a href="adapt-chassis-sc300-sc400.html" class="chassis-card">
+        <div class="chassis-card-make">Toyota</div>
+        <div class="chassis-card-name">Celica Supra Mk2 A60</div>
+        <div class="chassis-card-engines">5M-GE · 5M-GTE<br>2.0L / 2.8L I6</div>
+        <div class="chassis-card-years">1982 – 1986</div>
+        <div class="chassis-card-tags"><span class="chassis-tag">Street</span><span class="chassis-tag">Track</span></div>
+        <div class="chassis-card-arrow">→</div>
+      </a>
+
+      <a href="adapt-chassis-sc300-sc400.html" class="chassis-card">
+        <div class="chassis-card-make">Toyota</div>
+        <div class="chassis-card-name">Supra Mk3 A70</div>
+        <div class="chassis-card-engines">7M-GE · 7M-GTE<br>3.0L I6 DOHC</div>
+        <div class="chassis-card-years">1986 – 1992</div>
+        <div class="chassis-card-tags"><span class="chassis-tag">Street</span><span class="chassis-tag">Track</span><span class="chassis-tag">Turbo</span></div>
+        <div class="chassis-card-arrow">→</div>
+      </a>
+
+      <a href="adapt-chassis-sc300-sc400.html" class="chassis-card">
+        <div class="chassis-card-make">Toyota</div>
+        <div class="chassis-card-name">Supra Mk4 A80</div>
+        <div class="chassis-card-engines">2JZ-GE · 2JZ-GTE<br>3.0L I6 DOHC</div>
+        <div class="chassis-card-years">1993 – 2002</div>
+        <div class="chassis-card-tags"><span class="chassis-tag">Street</span><span class="chassis-tag">Track</span><span class="chassis-tag">Turbo</span></div>
+        <div class="chassis-card-arrow">→</div>
+      </a>
+
+      <a href="adapt-chassis-sc300-sc400.html" class="chassis-card">
+        <div class="chassis-card-make">Toyota</div>
+        <div class="chassis-card-name">Supra Mk5 A90</div>
+        <div class="chassis-card-engines">B58 · B48<br>3.0L / 2.0L I6/I4 Turbo</div>
+        <div class="chassis-card-years">2019 – Present</div>
+        <div class="chassis-card-tags"><span class="chassis-tag">Street</span><span class="chassis-tag">Track</span><span class="chassis-tag">Turbo</span></div>
+        <div class="chassis-card-arrow">→</div>
+      </a>
+
+      <a href="adapt-chassis-sc300-sc400.html" class="chassis-card">
+        <div class="chassis-card-make">Toyota</div>
+        <div class="chassis-card-name">GR Corolla</div>
+        <div class="chassis-card-engines">G16E-GTS<br>1.6L I3 Turbo AWD</div>
+        <div class="chassis-card-years">2023 – Present</div>
+        <div class="chassis-card-tags"><span class="chassis-tag">Street</span><span class="chassis-tag">Track</span></div>
+        <div class="chassis-card-arrow">→</div>
+      </a>
+
+      <a href="adapt-chassis-sc300-sc400.html" class="chassis-card">
+        <div class="chassis-card-make">Toyota</div>
+        <div class="chassis-card-name">86 / BRZ / FR-S</div>
+        <div class="chassis-card-engines">FA20<br>2.0L H4 DOHC</div>
+        <div class="chassis-card-years">2012 – 2021</div>
+        <div class="chassis-card-tags"><span class="chassis-tag">Street</span><span class="chassis-tag">Track</span></div>
+        <div class="chassis-card-arrow">→</div>
+      </a>
+
+      <a href="adapt-chassis-sc300-sc400.html" class="chassis-card">
+        <div class="chassis-card-make">Toyota</div>
+        <div class="chassis-card-name">GR86 / BRZ</div>
+        <div class="chassis-card-engines">FA24<br>2.4L H4 DOHC</div>
+        <div class="chassis-card-years">2022 – Present</div>
+        <div class="chassis-card-tags"><span class="chassis-tag">Street</span><span class="chassis-tag">Track</span></div>
+        <div class="chassis-card-arrow">→</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- LEXUS -->
+  <div class="make-section" id="make-lexus">
+    <div class="make-header">
+      <div class="make-name-large">LEXUS <em>/</em></div>
+      <div class="make-count-tag">4 Chassis</div>
+    </div>
+    <div class="chassis-grid">
+
+      <a href="adapt-chassis-sc300-sc400.html" class="chassis-card">
+        <div class="chassis-card-make">Lexus</div>
+        <div class="chassis-card-name">IS300</div>
+        <div class="chassis-card-engines">2JZ-GE<br>3.0L I6 DOHC</div>
+        <div class="chassis-card-years">2001 – 2005</div>
+        <div class="chassis-card-tags"><span class="chassis-tag">Street</span><span class="chassis-tag">Track</span></div>
+        <div class="chassis-card-arrow">→</div>
+      </a>
+
+      <a href="adapt-chassis-sc300-sc400.html" class="chassis-card">
+        <div class="chassis-card-make">Lexus</div>
+        <div class="chassis-card-name">GS300 / GS400</div>
+        <div class="chassis-card-engines">2JZ-GE · 1UZ-FE<br>3.0L I6 / 4.0L V8</div>
+        <div class="chassis-card-years">1998 – 2005</div>
+        <div class="chassis-card-tags"><span class="chassis-tag">Street</span><span class="chassis-tag">Track</span></div>
+        <div class="chassis-card-arrow">→</div>
+      </a>
+
+      <a href="adapt-chassis-sc300-sc400.html" class="chassis-card">
+        <div class="chassis-card-make">Lexus</div>
+        <div class="chassis-card-name">SC300 / SC400</div>
+        <div class="chassis-card-engines">2JZ-GE · 1UZ-FE<br>3.0L I6 / 4.0L V8</div>
+        <div class="chassis-card-years">1992 – 2000</div>
+        <div class="chassis-card-tags"><span class="chassis-tag">Street</span><span class="chassis-tag">Track</span></div>
+        <div class="chassis-card-arrow">→</div>
+      </a>
+
+      <a href="adapt-chassis-sc300-sc400.html" class="chassis-card">
+        <div class="chassis-card-make">Lexus</div>
+        <div class="chassis-card-name">RC300 / RC350 / RC-F</div>
+        <div class="chassis-card-engines">2GR-FSE · 5GR-FKS<br>V6 / V8</div>
+        <div class="chassis-card-years">2015 – Present</div>
+        <div class="chassis-card-tags"><span class="chassis-tag">Street</span><span class="chassis-tag">Track</span></div>
+        <div class="chassis-card-arrow">→</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- HONDA -->
+  <div class="make-section" id="make-honda">
+    <div class="make-header">
+      <div class="make-name-large">HONDA <em>/</em></div>
+      <div class="make-count-tag">5 Chassis</div>
+    </div>
+    <div class="chassis-grid">
+
+      <a href="adapt-chassis-sc300-sc400.html" class="chassis-card">
+        <div class="chassis-card-make">Honda</div>
+        <div class="chassis-card-name">S2000</div>
+        <div class="chassis-card-engines">F20C · F22C<br>2.0L / 2.2L I4 VTEC</div>
+        <div class="chassis-card-years">2000 – 2009</div>
+        <div class="chassis-card-tags"><span class="chassis-tag">Street</span><span class="chassis-tag">Track</span></div>
+        <div class="chassis-card-arrow">→</div>
+      </a>
+
+      <a href="adapt-chassis-sc300-sc400.html" class="chassis-card">
+        <div class="chassis-card-make">Acura</div>
+        <div class="chassis-card-name">RSX DC5</div>
+        <div class="chassis-card-engines">K20A · K20A2 · K20Z1<br>2.0L I4 i-VTEC</div>
+        <div class="chassis-card-years">2002 – 2006</div>
+        <div class="chassis-card-tags"><span class="chassis-tag">Street</span><span class="chassis-tag">Track</span></div>
+        <div class="chassis-card-arrow">→</div>
+      </a>
+
+      <a href="adapt-chassis-sc300-sc400.html" class="chassis-card">
+        <div class="chassis-card-make">Honda</div>
+        <div class="chassis-card-name">Civic EG</div>
+        <div class="chassis-card-engines">B16A · B18C · D-Series<br>1.5L / 1.6L / 1.8L</div>
+        <div class="chassis-card-years">1992 – 1995</div>
+        <div class="chassis-card-tags"><span class="chassis-tag">Street</span><span class="chassis-tag">Track</span></div>
+        <div class="chassis-card-arrow">→</div>
+      </a>
+
+      <a href="adapt-chassis-sc300-sc400.html" class="chassis-card">
+        <div class="chassis-card-make">Honda</div>
+        <div class="chassis-card-name">Civic EK</div>
+        <div class="chassis-card-engines">B16A · B18C · D-Series<br>1.5L / 1.6L / 1.8L</div>
+        <div class="chassis-card-years">1996 – 2000</div>
+        <div class="chassis-card-tags"><span class="chassis-tag">Street</span><span class="chassis-tag">Track</span></div>
+        <div class="chassis-card-arrow">→</div>
+      </a>
+
+      <a href="adapt-chassis-sc300-sc400.html" class="chassis-card">
+        <div class="chassis-card-make">Honda</div>
+        <div class="chassis-card-name">Civic Type R</div>
+        <div class="chassis-card-engines">K20C1<br>2.0L I4 Turbo VTEC</div>
+        <div class="chassis-card-years">2017 – Present</div>
+        <div class="chassis-card-tags"><span class="chassis-tag">Street</span><span class="chassis-tag">Track</span><span class="chassis-tag">Turbo</span></div>
+        <div class="chassis-card-arrow">→</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- SUBARU -->
+  <div class="make-section" id="make-subaru">
+    <div class="make-header">
+      <div class="make-name-large">SUBARU <em>/</em></div>
+      <div class="make-count-tag">2 Chassis</div>
+    </div>
+    <div class="chassis-grid">
+
+      <a href="adapt-chassis-sc300-sc400.html" class="chassis-card">
+        <div class="chassis-card-make">Subaru</div>
+        <div class="chassis-card-name">Impreza WRX STi</div>
+        <div class="chassis-card-engines">EJ207 · EJ257<br>2.0L / 2.5L H4 Turbo</div>
+        <div class="chassis-card-years">1994 – 2021</div>
+        <div class="chassis-card-tags"><span class="chassis-tag">Street</span><span class="chassis-tag">Track</span><span class="chassis-tag">Turbo</span><span class="chassis-tag">AWD</span></div>
+        <div class="chassis-card-arrow">→</div>
+      </a>
+
+      <a href="adapt-chassis-sc300-sc400.html" class="chassis-card">
+        <div class="chassis-card-make">Subaru</div>
+        <div class="chassis-card-name">WRX VA / VB</div>
+        <div class="chassis-card-engines">FA20DIT · FA24F<br>2.0L / 2.4L H4 Turbo</div>
+        <div class="chassis-card-years">2015 – Present</div>
+        <div class="chassis-card-tags"><span class="chassis-tag">Street</span><span class="chassis-tag">Track</span><span class="chassis-tag">Turbo</span></div>
+        <div class="chassis-card-arrow">→</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- BMW -->
+  <div class="make-section" id="make-bmw">
+    <div class="make-header">
+      <div class="make-name-large">BMW <em>/</em></div>
+      <div class="make-count-tag">3 Chassis</div>
+    </div>
+    <div class="chassis-grid">
+
+      <a href="adapt-chassis-sc300-sc400.html" class="chassis-card">
+        <div class="chassis-card-make">BMW</div>
+        <div class="chassis-card-name">Z4 G29</div>
+        <div class="chassis-card-engines">B58 · B46<br>3.0L / 2.0L I6/I4 Turbo</div>
+        <div class="chassis-card-years">2019 – Present</div>
+        <div class="chassis-card-tags"><span class="chassis-tag">Street</span><span class="chassis-tag">Track</span><span class="chassis-tag">Turbo</span></div>
+        <div class="chassis-card-arrow">→</div>
+      </a>
+
+      <a href="adapt-chassis-sc300-sc400.html" class="chassis-card">
+        <div class="chassis-card-make">BMW</div>
+        <div class="chassis-card-name">3 Series G20</div>
+        <div class="chassis-card-engines">B58 · B46 · B48<br>3.0L / 2.0L Turbo</div>
+        <div class="chassis-card-years">2019 – Present</div>
+        <div class="chassis-card-tags"><span class="chassis-tag">Street</span><span class="chassis-tag">Track</span></div>
+        <div class="chassis-card-arrow">→</div>
+      </a>
+
+      <a href="adapt-chassis-sc300-sc400.html" class="chassis-card">
+        <div class="chassis-card-make">BMW</div>
+        <div class="chassis-card-name">4 Series G22</div>
+        <div class="chassis-card-engines">B58 · B46 · B48<br>3.0L / 2.0L Turbo</div>
+        <div class="chassis-card-years">2021 – Present</div>
+        <div class="chassis-card-tags"><span class="chassis-tag">Street</span><span class="chassis-tag">Track</span></div>
+        <div class="chassis-card-arrow">→</div>
+      </a>
+
+    </div>
+  </div>
+
+</div>
+
+<section class="kit-finder-cta">
+  <h2 class="cta-title">DON'T SEE<br><em>YOUR CAR?</em></h2>
+  <p class="cta-sub">We're adding new chassis regularly. Reach out and let us know what you're building.</p>
+  <div class="cta-actions">
+    <a href="adapt-contact.html" class="btn-large">Request a Chassis</a>
+    <a href="adapt-service-kits.html" class="btn-large-ghost">Browse All Kits</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">ADAPT <span>PERFORMANCE</span></div>
+      <p class="footer-tagline">Chassis-specific maintenance kits and performance fluids for street and track builds.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/adaptperformance/" class="social-link">Instagram</a>
+        <a href="https://www.facebook.com/adaptandperform" class="social-link">Facebook</a>
+        <a href="#" class="social-link">YouTube</a>
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Toyota</p>
+      <ul class="footer-links">
+        <li><a href="#">Supra Mk3 A70</a></li>
+        <li><a href="#">Supra Mk4 A80</a></li>
+        <li><a href="#">GR86 / BRZ FA24</a></li>
+        <li><a href="#">GR Corolla</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Lexus / Honda</p>
+      <ul class="footer-links">
+        <li><a href="#">IS300</a></li>
+        <li><a href="#">SC300 / SC400</a></li>
+        <li><a href="#">S2000</a></li>
+        <li><a href="#">Civic Type R</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Support</p>
+      <ul class="footer-links">
+        <li><a href="#">Shipping &amp; Returns</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="adapt-contact.html">Contact Us</a></li>
+        <li><a href="adapt-about.html">About Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Adapt Performance Solutions LLC. All rights reserved.</p>
+    <ul class="footer-bottom-links"><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="adapt-contact.html">Contact</a></li></ul>
+  </div>
+</footer>
+
+<script>
+function filterMake(make, btn) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.make-section').forEach(s => {
+    s.style.display = (make === 'all' || s.id === 'make-' + make) ? 'block' : 'none';
+  });
+}
+</script>
+</body>
+</html>

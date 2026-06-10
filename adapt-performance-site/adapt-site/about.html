@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>About Us | Adapt Performance Solutions</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--black:#0a0a0a;--off-black:#111;--carbon:#1a1a1a;--mid:#2e2e2e;--muted:#888;--light-muted:#aaa;--off-white:#f0ede6;--accent:#c8a84b;--accent-bright:#e8c96a}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--off-white);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;background:rgba(10,10,10,.94);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,168,75,.15)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.12em;color:var(--off-white);text-decoration:none}.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--light-muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+.nav-cta{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--black);background:var(--accent);padding:9px 22px;text-decoration:none;transition:background .2s}
+.nav-cta:hover{background:var(--accent-bright)}
+
+.breadcrumb{margin-top:64px;padding:16px 48px;background:var(--off-black);border-bottom:1px solid rgba(200,168,75,.08);display:flex;align-items:center;gap:10px}
+.breadcrumb a,.breadcrumb span{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.breadcrumb a:hover{color:var(--accent)}.breadcrumb .sep{color:rgba(200,168,75,.3)}.breadcrumb span:last-child{color:var(--accent)}
+
+/* ── HERO ── */
+.about-hero{background:var(--off-black);padding:96px 48px 80px;position:relative;overflow:hidden;border-bottom:1px solid rgba(200,168,75,.1)}
+.about-hero::before{content:'ADAPT';position:absolute;bottom:-60px;right:-20px;font-family:'Bebas Neue',sans-serif;font-size:320px;letter-spacing:.02em;color:rgba(200,168,75,.03);line-height:1;pointer-events:none;user-select:none}
+.about-hero::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-15deg,transparent 0,transparent 60px,rgba(200,168,75,.02) 60px,rgba(200,168,75,.02) 61px);pointer-events:none}
+.about-hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end}
+
+.eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--accent)}
+
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,8vw,108px);line-height:.88;letter-spacing:.02em;color:var(--off-white);margin-bottom:28px}
+.hero-title em{font-style:normal;display:block;color:var(--accent)}
+.hero-body{font-size:16px;font-weight:300;color:var(--light-muted);line-height:1.8;max-width:440px}
+.hero-body strong{color:var(--off-white);font-weight:400}
+
+.hero-right{display:flex;flex-direction:column;gap:2px;align-self:stretch;justify-content:flex-end}
+.stat-block{background:var(--carbon);padding:28px 28px;border:1px solid rgba(255,255,255,.04);display:flex;gap:20px;align-items:center}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:.04em;color:rgba(200,168,75,.25);line-height:1;flex-shrink:0;min-width:80px}
+.stat-info{}
+.stat-label{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--off-white);margin-bottom:4px}
+.stat-desc{font-size:12px;font-weight:300;color:var(--muted);line-height:1.5}
+
+/* ── MISSION ── */
+.mission-section{padding:88px 48px;background:var(--black)}
+.mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.mission-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.mission-label::before{content:'';display:block;width:24px;height:1px;background:var(--accent)}
+.mission-title{font-family:'Bebas Neue',sans-serif;font-size:56px;line-height:.92;letter-spacing:.02em;color:var(--off-white);margin-bottom:32px}
+.mission-title em{font-style:normal;color:var(--accent)}
+.mission-body{font-size:15px;font-weight:300;color:var(--light-muted);line-height:1.85}
+.mission-body p{margin-bottom:20px}
+.mission-body p:last-child{margin-bottom:0}
+.mission-body strong{color:var(--off-white);font-weight:400}
+
+.mission-pillars{display:flex;flex-direction:column;gap:2px}
+.pillar-card{background:var(--carbon);padding:28px 28px;border:1px solid transparent;transition:border-color .25s}
+.pillar-card:hover{border-color:rgba(200,168,75,.2)}
+.pillar-num{font-family:'Bebas Neue',sans-serif;font-size:42px;color:rgba(200,168,75,.15);line-height:1;margin-bottom:12px;transition:color .25s}
+.pillar-card:hover .pillar-num{color:rgba(200,168,75,.4)}
+.pillar-title{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--off-white);margin-bottom:8px}
+.pillar-body{font-size:13px;font-weight:300;color:var(--muted);line-height:1.7}
+
+/* ── STORY SPLIT ── */
+.story-section{background:var(--off-black);display:grid;grid-template-columns:1fr 1fr;min-height:560px;border-top:1px solid rgba(200,168,75,.08);border-bottom:1px solid rgba(200,168,75,.08)}
+.story-left{padding:80px 56px;position:relative;overflow:hidden;background:var(--carbon)}
+.story-left::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-12deg,transparent 0,transparent 38px,rgba(200,168,75,.025) 38px,rgba(200,168,75,.025) 39px);pointer-events:none}
+.story-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+.story-label::before{content:'';display:block;width:24px;height:1px;background:var(--accent)}
+.story-headline{font-family:'Bebas Neue',sans-serif;font-size:64px;line-height:.9;letter-spacing:.02em;color:var(--off-white);margin-bottom:28px;position:relative;z-index:1}
+.story-headline em{font-style:normal;color:var(--accent)}
+.story-text{font-size:15px;font-weight:300;color:var(--light-muted);line-height:1.85;position:relative;z-index:1}
+.story-text p{margin-bottom:18px}.story-text p:last-child{margin-bottom:0}
+.story-text strong{color:var(--off-white);font-weight:400}
+
+.story-right{padding:80px 56px;display:flex;flex-direction:column;justify-content:center;gap:32px;border-left:1px solid rgba(255,255,255,.04)}
+.value-item{display:flex;gap:20px;align-items:flex-start}
+.value-icon{width:44px;height:44px;background:rgba(200,168,75,.08);border:1px solid rgba(200,168,75,.2);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.value-text{}
+.value-title{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--off-white);margin-bottom:5px}
+.value-desc{font-size:13px;font-weight:300;color:var(--muted);line-height:1.65}
+
+/* ── WHY ADAPT ── */
+.why-section{padding:88px 48px;background:var(--black)}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:48px}
+.why-card{background:var(--carbon);padding:36px 28px;border:1px solid transparent;transition:border-color .2s}
+.why-card:hover{border-color:rgba(200,168,75,.2)}
+.why-card-num{font-family:'Bebas Neue',sans-serif;font-size:56px;color:rgba(200,168,75,.12);line-height:1;margin-bottom:16px;transition:color .25s}
+.why-card:hover .why-card-num{color:rgba(200,168,75,.3)}
+.why-card-title{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--off-white);margin-bottom:12px}
+.why-card-body{font-size:13px;font-weight:300;color:var(--muted);line-height:1.75}
+
+/* ── EQUIPT CALLOUT ── */
+.equipt-callout{margin:0 48px;background:var(--carbon);border:1px solid rgba(200,168,75,.2);display:grid;grid-template-columns:1fr 1fr}
+.eq-left{padding:64px 56px;border-right:1px solid rgba(255,255,255,.04)}
+.eq-eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.eq-division{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+.eq-title{font-family:'Bebas Neue',sans-serif;font-size:56px;line-height:.9;letter-spacing:.02em;color:var(--off-white);margin-bottom:20px}
+.eq-body{font-size:14px;font-weight:300;color:var(--muted);line-height:1.8;margin-bottom:32px;max-width:340px}
+.btn-teal{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--black);background:#1eb8a0;padding:13px 32px;text-decoration:none;display:inline-block;transition:background .2s}
+.btn-teal:hover{background:#3dd4bc}
+.eq-right{padding:64px 56px;display:flex;flex-direction:column;gap:24px;justify-content:center}
+.eq-service{display:flex;align-items:center;gap:14px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.05)}
+.eq-service:last-child{border-bottom:none;padding-bottom:0}
+.eq-service-icon{font-size:22px;width:40px;text-align:center;flex-shrink:0}
+.eq-service-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--off-white);margin-bottom:3px}
+.eq-service-desc{font-size:12px;font-weight:300;color:var(--muted)}
+
+/* ── CTA BANNER ── */
+.cta-banner{padding:88px 48px;background:var(--off-black);text-align:center}
+.cta-title{font-family:'Bebas Neue',sans-serif;font-size:80px;letter-spacing:.02em;color:var(--off-white);line-height:.92;margin-bottom:20px}
+.cta-title em{font-style:normal;color:var(--accent)}
+.cta-sub{font-size:14px;font-weight:300;color:var(--muted);margin-bottom:40px}
+.cta-actions{display:flex;justify-content:center;gap:14px}
+.btn-gold{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--black);background:var(--accent);padding:16px 48px;text-decoration:none;display:inline-block;transition:background .2s}
+.btn-gold:hover{background:var(--accent-bright)}
+.btn-ghost-lg{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--off-white);border:1px solid rgba(255,255,255,.15);padding:16px 48px;text-decoration:none;display:inline-block;transition:all .2s}
+.btn-ghost-lg:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── FOOTER ── */
+footer{background:var(--off-black);border-top:1px solid rgba(200,168,75,.15);padding:56px 48px 32px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.12em;color:var(--off-white);margin-bottom:16px}.footer-logo span{color:var(--accent)}
+.footer-tagline{font-size:13px;font-weight:300;color:var(--muted);line-height:1.7;max-width:220px;margin-bottom:24px}
+.footer-social{display:flex;gap:12px}
+.social-link{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}.social-link:hover{color:var(--accent)}
+.footer-col-title{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a{font-size:13px;font-weight:300;color:var(--muted);text-decoration:none;transition:color .2s}.footer-links a:hover{color:var(--off-white)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:1px solid rgba(255,255,255,.05)}
+.footer-copy{font-size:12px;font-weight:300;color:rgba(136,136,136,.6)}
+.footer-bottom-links{display:flex;gap:24px;list-style:none}
+.footer-bottom-links a{font-size:12px;font-weight:300;color:rgba(136,136,136,.6);text-decoration:none;transition:color .2s}.footer-bottom-links a:hover{color:var(--muted)}
+</style>
+  <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">ADAPT <span>PERFORMANCE</span></a>
+  <ul class="nav-links">
+    <li><a href="chassis.html">Chassis</a></li>
+    <li><a href="service-kits.html">Maintenance</a></li>
+    <li><a href="fluids.html">Accessories</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#" class="active">About</a></li>
+  </ul>
+  <a href="chassis.html" class="nav-cta">Find My Kit</a>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">Home</a>
+  <span class="sep">›</span>
+  <span>About Us</span>
+</div>
+
+<!-- HERO -->
+<section class="about-hero">
+  <div class="about-hero-inner">
+    <div>
+      <p class="eyebrow">Who We Are</p>
+      <h1 class="hero-title">BUILT FROM<br>A PASSION<br><em>FOR THIS.</em></h1>
+      <p class="hero-body">
+        Adapt Performance Solutions is a <strong>husband-and-wife-run business</strong> built from years of maintaining, modifying, and pushing vehicles to their limits. We know firsthand how crucial reliable maintenance is to performance — so we built Adapt to make it easier for everyone in the scene to do it right.
+      </p>
+    </div>
+    <div class="hero-right">
+      <div class="stat-block">
+        <div class="stat-num">30+</div>
+        <div class="stat-info">
+          <div class="stat-label">Chassis Supported</div>
+          <div class="stat-desc">Toyota, Lexus, Honda, Subaru, BMW — with more being added regularly</div>
+        </div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">3</div>
+        <div class="stat-info">
+          <div class="stat-label">Service Tiers</div>
+          <div class="stat-desc">ECO / OEM+  / Track — matched to your build level, not just your engine</div>
+        </div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">100+</div>
+        <div class="stat-info">
+          <div class="stat-label">Brands Carried</div>
+          <div class="stat-desc">Motul, HKS, Nismo, ARP, ACL, Ferrea, and more</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission-section">
+  <div class="mission-grid">
+    <div>
+      <p class="mission-label">Our Mission</p>
+      <h2 class="mission-title">MAINTEN-<br>ANCE IS THE<br><em>FOUNDATION.</em></h2>
+      <div class="mission-body">
+        <p>At Adapt Performance Solutions, we believe that <strong>proper maintenance is the foundation of performance.</strong> Whether you're maintaining your OEM daily driver, enhancing your street-performance build, or pushing the limits with a high-performance track setup, our maintenance kits are designed to keep your vehicle running at its best.</p>
+        <p>Modern performance isn't just about modifications — it's about <strong>longevity, reliability, and precision.</strong> Generic kits pull from a catalog. Ours are built chassis-up, matched to your engine's displacement, oil capacity, thermal load, and service interval. Every fluid choice is spec'd for how that platform actually lives.</p>
+        <p>We're enthusiasts. We're builders. We're in the same garages and at the same track days. We built Adapt because we couldn't find something that did this right — so we made it ourselves.</p>
+      </div>
+    </div>
+    <div class="mission-pillars">
+      <div class="pillar-card">
+        <div class="pillar-num">01</div>
+        <div class="pillar-title">Chassis-Specific by Default</div>
+        <div class="pillar-body">Every kit is engineered for a specific platform — oil capacity, viscosity, filter fitment, and drain hardware are all matched before you even check out. No cross-referencing required.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">02</div>
+        <div class="pillar-title">Tiered for Your Build Level</div>
+        <div class="pillar-body">Daily driver, OEM+ street build, or full track car — the three-tier system means you're not over-spending for street use or under-speccing for what your engine actually needs.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">03</div>
+        <div class="pillar-title">Top-Shelf Fluids Only</div>
+        <div class="pillar-body">Motul, HKS, Nismo, ARP — brands the community trusts, not whoever offered the best margin. If it doesn't belong under your hood, it doesn't belong in our catalog.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">04</div>
+        <div class="pillar-title">Passion-Driven Business</div>
+        <div class="pillar-body">We're a small, owner-operated business — not a warehouse dropshipper. Every order is packed with care and every product listing is written by someone who actually works on these cars.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story-section">
+  <div class="story-left">
+    <p class="story-label">Our Story</p>
+    <h2 class="story-headline">PASSION<br><em>DRIVEN.</em></h2>
+    <div class="story-text">
+      <p>Adapt started the way most good things do — out of frustration. We kept running into the same problem: sourcing the right fluids and hardware for our builds meant hours of cross-referencing specs, checking forums, and hoping whoever put the product listing together knew what they were talking about.</p>
+      <p>We knew the specs. We knew the platforms. So we started building kits the way we'd want them — <strong>pre-spec'd, tiered by use case, and complete from the jump.</strong> No hunting for a crush washer separately. No guessing if the filter threads match. Everything in one order, ready to go.</p>
+      <p>Adapt Performance Solutions grew out of that process. What started as kits for our own builds became a catalog serving the broader JDM, sport compact, and performance community. <strong>Husband and wife, built together, driven by the same love for this scene.</strong></p>
+      <p>And Equipt — our branding division — came from the same instinct: if we're going to do something, do it right and make it look the part.</p>
+    </div>
+  </div>
+  <div class="story-right">
+    <div class="value-item">
+      <div class="value-icon">🔧</div>
+      <div class="value-text">
+        <div class="value-title">Built by Builders</div>
+        <div class="value-desc">We work on the same cars we sell kits for. That means the specs are right, the products are chosen from real-world use, and the recommendations are honest.</div>
+      </div>
+    </div>
+    <div class="value-item">
+      <div class="value-icon">📐</div>
+      <div class="value-text">
+        <div class="value-title">Spec-First Philosophy</div>
+        <div class="value-desc">We start with the platform spec and work outward. Viscosity, capacity, filter fitment, and thermal demands determine every kit — not what's popular or easy to source.</div>
+      </div>
+    </div>
+    <div class="value-item">
+      <div class="value-icon">🏁</div>
+      <div class="value-text">
+        <div class="value-title">Street to Track</div>
+        <div class="value-desc">Our three-tier system exists because the same engine in a daily driver and a time-attack car has different needs. We respect that and spec accordingly.</div>
+      </div>
+    </div>
+    <div class="value-item">
+      <div class="value-icon">📦</div>
+      <div class="value-text">
+        <div class="value-title">Owner-Operated</div>
+        <div class="value-desc">Every order matters to us because this is our business, not a side catalog. You're buying from the people who built the product listings and packed the box.</div>
+      </div>
+    </div>
+    <div class="value-item">
+      <div class="value-icon">🤝</div>
+      <div class="value-text">
+        <div class="value-title">Community-First</div>
+        <div class="value-desc">We're part of the same community we serve. Track days, build threads, garage sessions — we're in it, and that's reflected in how we operate and what we choose to carry.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY ADAPT -->
+<section class="why-section">
+  <p class="eyebrow" style="margin-bottom:16px">Why Choose Adapt</p>
+  <h2 style="font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:.03em;color:var(--off-white);line-height:1">WHAT SETS US <span style="color:var(--accent)">APART.</span></h2>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-card-num">01</div>
+      <div class="why-card-title">No Generic Kits</div>
+      <div class="why-card-body">Every product is engineered for a specific chassis and engine combination. There are no universal "fits all" kits in our catalog — because that's not how engines work.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-card-num">02</div>
+      <div class="why-card-title">Complete Out of the Box</div>
+      <div class="why-card-body">Oil, filter, crush washer, and drain hardware. Everything you need to complete the service interval in one order. No follow-up trips to the parts store.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-card-num">03</div>
+      <div class="why-card-title">Transparent Specs</div>
+      <div class="why-card-body">Every product listing shows exactly what's in the kit, the fill volume, the viscosity, and why it was chosen. You should know what you're putting in your engine.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-card-num">04</div>
+      <div class="why-card-title">Expanding Catalog</div>
+      <div class="why-card-body">We're actively adding chassis, fluid categories, and service kits. Service Kits+, engine-specific packages, and more are in development and coming soon.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-card-num">05</div>
+      <div class="why-card-title">Fast Processing</div>
+      <div class="why-card-body">Orders are processed within 1–3 business days. You'll get a tracking number when your order ships so you know exactly when your kit is arriving.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-card-num">06</div>
+      <div class="why-card-title">Real Support</div>
+      <div class="why-card-body">Questions about your platform? Not sure which tier is right for your build? Reach out — you'll hear from someone who actually knows these cars, not a support ticket queue.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPT CALLOUT -->
+<div style="padding:0 0 64px 0;background:var(--black)">
+  <div class="equipt-callout">
+    <div class="eq-left">
+      <div class="eq-eyebrow">Division</div>
+      <div class="eq-division">A Branch of Adapt Performance Solutions</div>
+      <h3 class="eq-title">MEET<br>EQUIPT.</h3>
+      <p class="eq-body">The creative force behind Adapt's identity — and yours. Equipt is our branding and design division serving race shops, performance brands, and builders who need their visuals to match their builds.</p>
+      <a href="equipt.html" class="btn-teal">Visit Equipt</a>
+    </div>
+    <div class="eq-right">
+      <div class="eq-service">
+        <div class="eq-service-icon">🖨️</div>
+        <div><div class="eq-service-name">Stickers &amp; Decals</div><div class="eq-service-desc">Die-cut vinyl, large-format prints, shop graphics</div></div>
+      </div>
+      <div class="eq-service">
+        <div class="eq-service-icon">✏️</div>
+        <div><div class="eq-service-name">Logo &amp; Brand Design</div><div class="eq-service-desc">Identity systems built from the ground up</div></div>
+      </div>
+      <div class="eq-service">
+        <div class="eq-service-icon">👕</div>
+        <div><div class="eq-service-name">Merch &amp; Team Gear</div><div class="eq-service-desc">Shop polos, crew tees, hats, and branded apparel</div></div>
+      </div>
+      <div class="eq-service">
+        <div class="eq-service-icon">📸</div>
+        <div><div class="eq-service-name">Media &amp; Content</div><div class="eq-service-desc">Build coverage, event photography, social content</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM CTA -->
+<section class="cta-banner">
+  <h2 class="cta-title">READY TO<br><em>BUILD RIGHT?</em></h2>
+  <p class="cta-sub">Find the kit that's spec'd for your chassis and start your next service interval the right way.</p>
+  <div class="cta-actions">
+    <a href="chassis.html" class="btn-gold">Shop by Chassis</a>
+    <a href="contact.html" class="btn-ghost-lg">Get in Touch</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">ADAPT <span>PERFORMANCE</span></div>
+      <p class="footer-tagline">Chassis-specific maintenance kits and performance fluids for street and track builds.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/adaptperformance/" class="social-link">Instagram</a>
+        <a href="https://www.facebook.com/adaptandperform" class="social-link">Facebook</a>
+        <a href="#" class="social-link">YouTube</a>
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Shop</p>
+      <ul class="footer-links">
+        <li><a href="chassis.html">All Chassis</a></li>
+        <li><a href="service-kits.html">Service Kits</a></li>
+        <li><a href="fluids.html">Fluids</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Company</p>
+      <ul class="footer-links">
+        <li><a href="#">About Us</a></li>
+        <li><a href="equipt.html">Equipt Division</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Support</p>
+      <ul class="footer-links">
+        <li><a href="faqs.html">FAQs</a></li>
+        <li><a href="#">Shipping &amp; Returns</a></li>
+        <li><a href="#">Warranty &amp; Liability</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Adapt Performance Solutions LLC. All rights reserved.</p>
+    <ul class="footer-bottom-links"><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="contact.html">Contact</a></li></ul>
+  </div>
+</footer>
+
+  <script src="assets/js/global.js"></script>
+</body>
+</html>

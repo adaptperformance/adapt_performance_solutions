@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop — Service Kits &amp; Fluids | Adapt Performance Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:         #0a0a0a;
+  --off-black:     #111111;
+  --carbon:        #1a1a1a;
+  --mid:           #2e2e2e;
+  --steel:         #3d3d3d;
+  --muted:         #888888;
+  --light-muted:   #aaaaaa;
+  --off-white:     #f0ede6;
+  --accent:        #c8a84b;
+  --accent-dim:    #8a6f2a;
+  --accent-bright: #e8c96a;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--off-white);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 64px;
+  background: rgba(10,10,10,0.94); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200,168,75,0.15);
+}
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.12em; color: var(--off-white); text-decoration: none; }
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--light-muted); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--accent); }
+.nav-cta { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--black); background: var(--accent); padding: 9px 22px; text-decoration: none; transition: background 0.2s; }
+.nav-cta:hover { background: var(--accent-bright); }
+
+/* ─── BREADCRUMB ─── */
+.breadcrumb { margin-top: 64px; padding: 16px 48px; background: var(--off-black); border-bottom: 1px solid rgba(200,168,75,0.08); display: flex; align-items: center; gap: 10px; }
+.breadcrumb a, .breadcrumb span { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--accent); }
+.breadcrumb .sep { color: rgba(200,168,75,0.3); }
+.breadcrumb span:last-child { color: var(--accent); }
+
+/* ─── SHOP HERO ─── */
+.shop-hero {
+  background: var(--off-black);
+  padding: 56px 48px 48px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(200,168,75,0.1);
+}
+.shop-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(-15deg, transparent 0, transparent 48px, rgba(200,168,75,0.025) 48px, rgba(200,168,75,0.025) 49px);
+  pointer-events: none;
+}
+.shop-hero-inner { position: relative; z-index: 1; display: flex; align-items: flex-end; justify-content: space-between; gap: 48px; }
+.shop-hero-left {}
+.shop-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 14px; }
+.shop-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--accent); }
+.shop-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 7vw, 88px); line-height: 0.88; letter-spacing: 0.02em; color: var(--off-white); margin-bottom: 16px; }
+.shop-title em { font-style: normal; color: var(--accent); }
+.shop-sub { font-size: 14px; font-weight: 300; color: var(--light-muted); line-height: 1.75; max-width: 480px; }
+
+/* Quick-filter chassis chips */
+.chassis-filter-row { margin-top: 28px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.filter-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); flex-shrink: 0; }
+.filter-chip {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 5px 14px; cursor: pointer;
+  transition: all 0.2s; background: transparent;
+}
+.filter-chip:hover, .filter-chip.active {
+  color: var(--black); background: var(--accent); border-color: var(--accent);
+}
+.filter-chip.active-outline {
+  color: var(--accent); border-color: rgba(200,168,75,0.4);
+}
+
+/* Stats row */
+.shop-stats { display: flex; flex-direction: column; gap: 2px; flex-shrink: 0; min-width: 180px; }
+.shop-stat { background: var(--carbon); padding: 16px 20px; border: 1px solid rgba(255,255,255,0.04); text-align: right; }
+.shop-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 0.04em; color: var(--accent); line-height: 1; }
+.shop-stat-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+
+/* ─── CATEGORY TABS ─── */
+.category-nav {
+  background: var(--black);
+  padding: 0 48px;
+  border-bottom: 1px solid rgba(200,168,75,0.1);
+  display: flex; gap: 0;
+  position: sticky; top: 64px; z-index: 90;
+  overflow-x: auto;
+}
+.cat-tab {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--muted);
+  padding: 18px 28px; cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s; text-decoration: none;
+  display: flex; align-items: center; gap: 8px; white-space: nowrap;
+  background: transparent; border-top: none; border-left: none; border-right: none;
+}
+.cat-tab:hover { color: var(--off-white); }
+.cat-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.cat-count {
+  font-family: 'Barlow', sans-serif;
+  font-size: 10px; font-weight: 400;
+  background: rgba(200,168,75,0.12); color: var(--accent);
+  padding: 2px 7px; border-radius: 2px;
+}
+
+/* ─── SHOP LAYOUT ─── */
+.shop-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 0;
+  padding: 0;
+  min-height: 60vh;
+  align-items: start;
+}
+
+/* ─── SIDEBAR ─── */
+.shop-sidebar {
+  background: var(--off-black);
+  border-right: 1px solid rgba(255,255,255,0.05);
+  padding: 32px 24px;
+  position: sticky;
+  top: 113px;
+  max-height: calc(100vh - 113px);
+  overflow-y: auto;
+}
+.sidebar-group { margin-bottom: 28px; }
+.sidebar-group:last-child { margin-bottom: 0; }
+.sidebar-group-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 14px; padding-bottom: 10px;
+  border-bottom: 1px solid rgba(200,168,75,0.15);
+}
+.sidebar-option {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 10px; cursor: pointer;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 500; letter-spacing: 0.05em;
+  text-transform: uppercase; color: var(--muted);
+  border: 1px solid transparent;
+  transition: all 0.2s; user-select: none;
+  background: transparent;
+}
+.sidebar-option:hover { color: var(--off-white); border-color: rgba(200,168,75,0.15); }
+.sidebar-option.selected { color: var(--accent); border-color: rgba(200,168,75,0.3); background: rgba(200,168,75,0.05); }
+.sidebar-count { font-size: 11px; color: var(--muted); font-weight: 300; }
+
+/* Tier legend */
+.tier-legend { display: flex; flex-direction: column; gap: 8px; }
+.tier-item { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 6px 8px; transition: background 0.2s; }
+.tier-item:hover { background: rgba(255,255,255,0.03); }
+.tier-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.tier-dot.eco { background: #4a9d5e; }
+.tier-dot.street { background: var(--accent); }
+.tier-dot.track { background: #c84b4b; }
+.tier-name-label { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.tier-item:hover .tier-name-label { color: var(--off-white); }
+
+/* ─── PRODUCT GRID ─── */
+.product-main { padding: 32px 40px 72px; background: var(--black); }
+
+.products-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 28px;
+}
+.products-count {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+}
+.products-count span { color: var(--off-white); }
+.sort-row { display: flex; align-items: center; gap: 10px; }
+.sort-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+.sort-select {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
+  background: var(--carbon); border: 1px solid rgba(255,255,255,0.08);
+  color: var(--off-white); padding: 7px 12px;
+  outline: none; cursor: pointer;
+  -webkit-appearance: none;
+}
+
+/* ─── PRODUCT CARDS ─── */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.product-card {
+  background: var(--carbon);
+  border: 1px solid transparent;
+  transition: border-color 0.25s, background 0.2s, transform 0.2s;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+}
+.product-card:hover {
+  border-color: rgba(200,168,75,0.25);
+  background: var(--mid);
+  transform: translateY(-2px);
+}
+.product-card.featured { border-color: rgba(200,168,75,0.2); }
+
+.product-img-wrap {
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: #111;
+  position: relative;
+}
+.product-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease, opacity 0.3s;
+  opacity: 0.9;
+}
+.product-card:hover .product-img-wrap img { transform: scale(1.04); opacity: 1; }
+
+/* tier badge overlaid on image */
+.product-tier-badge {
+  position: absolute;
+  top: 12px; left: 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--black);
+  padding: 4px 10px;
+}
+.product-tier-badge.eco { background: #4a9d5e; }
+.product-tier-badge.street { background: var(--accent); }
+.product-tier-badge.track { background: #c84b4b; color: var(--off-white); }
+
+/* bestseller / new badge */
+.product-meta-badge {
+  position: absolute;
+  top: 12px; right: 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--black);
+  background: var(--accent-bright); padding: 4px 10px;
+}
+
+.product-card-body { padding: 20px 20px 22px; }
+
+.product-chassis-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 6px;
+}
+.product-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 17px; font-weight: 600; letter-spacing: 0.04em;
+  color: var(--off-white); line-height: 1.25;
+  margin-bottom: 8px;
+  transition: color 0.2s;
+}
+.product-card:hover .product-name { color: var(--accent); }
+.product-desc {
+  font-size: 12px; font-weight: 300;
+  color: var(--muted); line-height: 1.6; margin-bottom: 16px;
+}
+
+/* contents chips */
+.product-contents { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 16px; }
+.content-chip {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 500; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted);
+  border: 1px solid rgba(255,255,255,0.08); padding: 3px 8px;
+}
+
+.product-price-row {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.05);
+}
+.product-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 34px; letter-spacing: 0.04em;
+  color: var(--off-white); line-height: 1;
+}
+.product-price sub {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px; font-weight: 300;
+  color: var(--muted); margin-left: 2px; vertical-align: bottom;
+  font-style: normal;
+}
+.btn-add {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--black);
+  background: var(--accent); border: none; padding: 10px 20px;
+  cursor: pointer; transition: background 0.2s;
+  text-decoration: none; display: inline-block;
+  flex-shrink: 0;
+}
+.btn-add:hover { background: var(--accent-bright); }
+
+/* ─── SECTION DIVIDER ─── */
+.product-section-divider {
+  grid-column: 1 / -1;
+  padding: 28px 0 20px;
+  display: flex; align-items: center; gap: 20px;
+}
+.psd-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px; letter-spacing: 0.04em;
+  color: var(--off-white); white-space: nowrap;
+}
+.psd-label em { font-style: normal; color: var(--accent); }
+.psd-line { flex: 1; height: 1px; background: rgba(200,168,75,0.15); }
+
+/* ─── UPSELL BANNER ─── */
+.upsell-banner {
+  background: var(--carbon);
+  border: 1px solid rgba(200,168,75,0.2);
+  padding: 28px 36px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; margin: 32px 40px 0;
+}
+.upsell-left { display: flex; align-items: center; gap: 16px; }
+.upsell-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); opacity: 0.5; animation: pulse 2s ease-in-out infinite; flex-shrink: 0; }
+@keyframes pulse { 0%,100%{opacity:.5;transform:scale(1)} 50%{opacity:1;transform:scale(1.2)} }
+.upsell-text { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--off-white); }
+.upsell-sub { font-size: 12px; font-weight: 300; color: var(--muted); margin-top: 3px; }
+.btn-outline-sm { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); background: transparent; border: 1px solid rgba(200,168,75,0.3); padding: 10px 22px; cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block; white-space: nowrap; }
+.btn-outline-sm:hover { background: rgba(200,168,75,0.08); border-color: var(--accent); }
+
+/* ─── FOOTER ─── */
+footer { background: var(--off-black); border-top: 1px solid rgba(200,168,75,0.15); padding: 56px 48px 32px; }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 0.12em; color: var(--off-white); margin-bottom: 16px; }
+.footer-logo span { color: var(--accent); }
+.footer-tagline { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.7; max-width: 220px; margin-bottom: 24px; }
+.footer-social { display: flex; gap: 12px; }
+.social-link { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.social-link:hover { color: var(--accent); }
+.footer-col-title { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid rgba(200,168,75,0.15); }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-links a { font-size: 13px; font-weight: 300; color: var(--muted); text-decoration: none; transition: color 0.2s; letter-spacing: 0.02em; }
+.footer-links a:hover { color: var(--off-white); }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.06); }
+.footer-copy { font-size: 11px; font-weight: 300; color: var(--muted); letter-spacing: 0.04em; }
+.footer-bottom-links { display: flex; gap: 20px; list-style: none; }
+.footer-bottom-links a { font-size: 11px; font-weight: 300; color: var(--muted); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+.footer-bottom-links a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="adapt-perform-homepage.html" class="nav-logo">ADAPT <span>PERFORMANCE</span></a>
+  <ul class="nav-links">
+    <li><a href="adapt-chassis-select-manufacturer.html">Chassis</a></li>
+    <li><a href="adapt-shop.html" class="active">Maintenance</a></li>
+    <li><a href="#">Accessories</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="adapt-about.html">About</a></li>
+  </ul>
+  <a href="#products" class="nav-cta">Shop Kits</a>
+</nav>
+
+<div class="breadcrumb">
+  <a href="adapt-perform-homepage.html">Home</a>
+  <span class="sep">›</span>
+  <span>Shop</span>
+</div>
+
+<!-- SHOP HERO -->
+<section class="shop-hero">
+  <div class="shop-hero-inner">
+    <div class="shop-hero-left">
+      <p class="shop-eyebrow">Service Kits &amp; Fluids</p>
+      <h1 class="shop-title">SPEC'D BY <em>ADAPT.</em></h1>
+      <p class="shop-sub">Every kit built to the chassis. No guessing on viscosity, capacity, or part numbers. Select your platform and the right parts ship — or filter the full catalog below.</p>
+
+      <div class="chassis-filter-row">
+        <span class="filter-label">Filter by chassis:</span>
+        <button class="filter-chip active" onclick="filterChassis(this,'all')">All</button>
+        <button class="filter-chip" onclick="filterChassis(this,'sc300')">SC300 / SC400</button>
+        <button class="filter-chip" onclick="filterChassis(this,'is300')">IS300</button>
+        <button class="filter-chip" onclick="filterChassis(this,'gs300')">GS300 / GS400</button>
+        <button class="filter-chip" onclick="filterChassis(this,'s2000')">S2000</button>
+        <button class="filter-chip" onclick="filterChassis(this,'wrx')">WRX STi</button>
+        <button class="filter-chip" onclick="filterChassis(this,'gr86')">GR86</button>
+      </div>
+    </div>
+
+    <div class="shop-stats">
+      <div class="shop-stat">
+        <div class="shop-stat-num">30+</div>
+        <div class="shop-stat-label">Chassis Covered</div>
+      </div>
+      <div class="shop-stat">
+        <div class="shop-stat-num">3</div>
+        <div class="shop-stat-label">Service Tiers</div>
+      </div>
+      <div class="shop-stat">
+        <div class="shop-stat-num">100%</div>
+        <div class="shop-stat-label">Spec Verified</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORY TABS -->
+<nav class="category-nav" id="products">
+  <button class="cat-tab active" onclick="switchCat(this,'oil')">Oil Change Kits <span class="cat-count">9</span></button>
+  <button class="cat-tab" onclick="switchCat(this,'brake')">Brake Service <span class="cat-count">6</span></button>
+  <button class="cat-tab" onclick="switchCat(this,'drivetrain')">Drivetrain Fluid Kits <span class="cat-count">8</span></button>
+  <button class="cat-tab" onclick="switchCat(this,'master')">Fluid Master Kits <span class="cat-count">4</span></button>
+  <button class="cat-tab" onclick="switchCat(this,'standalone')">Standalone Fluids <span class="cat-count">12</span></button>
+</nav>
+
+<!-- SHOP LAYOUT -->
+<div class="shop-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="shop-sidebar">
+
+    <div class="sidebar-group">
+      <div class="sidebar-group-title">Manufacturer</div>
+      <button class="sidebar-option selected" onclick="toggleSidebar(this)">All Makes <span class="sidebar-count">30+</span></button>
+      <button class="sidebar-option" onclick="toggleSidebar(this)">Lexus <span class="sidebar-count">6</span></button>
+      <button class="sidebar-option" onclick="toggleSidebar(this)">Toyota <span class="sidebar-count">8</span></button>
+      <button class="sidebar-option" onclick="toggleSidebar(this)">Honda <span class="sidebar-count">4</span></button>
+      <button class="sidebar-option" onclick="toggleSidebar(this)">Subaru <span class="sidebar-count">3</span></button>
+      <button class="sidebar-option" onclick="toggleSidebar(this)">BMW <span class="sidebar-count">2</span></button>
+    </div>
+
+    <div class="sidebar-group">
+      <div class="sidebar-group-title">Service Tier</div>
+      <div class="tier-legend">
+        <div class="tier-item">
+          <div class="tier-dot eco"></div>
+          <span class="tier-name-label">ECO / OEM</span>
+        </div>
+        <div class="tier-item">
+          <div class="tier-dot street"></div>
+          <span class="tier-name-label">Street Performance</span>
+        </div>
+        <div class="tier-item">
+          <div class="tier-dot track"></div>
+          <span class="tier-name-label">Track / Purpose Built</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-group">
+      <div class="sidebar-group-title">Price Range</div>
+      <button class="sidebar-option" onclick="toggleSidebar(this)">Under $100</button>
+      <button class="sidebar-option" onclick="toggleSidebar(this)">$100 – $150</button>
+      <button class="sidebar-option" onclick="toggleSidebar(this)">$150 – $200</button>
+      <button class="sidebar-option selected" onclick="toggleSidebar(this)">$200+</button>
+    </div>
+
+    <div class="sidebar-group">
+      <div class="sidebar-group-title">In Stock</div>
+      <button class="sidebar-option selected" onclick="toggleSidebar(this)">Available Now</button>
+      <button class="sidebar-option" onclick="toggleSidebar(this)">All (incl. Pre-Order)</button>
+    </div>
+
+  </aside>
+
+  <!-- PRODUCTS -->
+  <div class="product-main">
+    <div class="products-header">
+      <div class="products-count">Showing <span>9 products</span> in Oil Change Kits</div>
+      <div class="sort-row">
+        <span class="sort-label">Sort:</span>
+        <select class="sort-select">
+          <option>Featured</option>
+          <option>Price: Low to High</option>
+          <option>Price: High to Low</option>
+          <option>Chassis A–Z</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="products-grid">
+
+      <!-- SECTION HEADER: Lexus -->
+      <div class="product-section-divider">
+        <div class="psd-label">LEXUS <em>KITS</em></div>
+        <div class="psd-line"></div>
+      </div>
+
+      <!-- SC300 / SC400 — Track -->
+      <a href="#" class="product-card featured">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600&q=80" alt="Track Oil Kit">
+          <span class="product-tier-badge track">Track</span>
+          <span class="product-meta-badge">Best Seller</span>
+        </div>
+        <div class="product-card-body">
+          <div class="product-chassis-tag">Lexus SC300 / SC400</div>
+          <div class="product-name">Track / Purpose Built Oil Change Kit</div>
+          <div class="product-desc">Motul 300V 5W-40 Competition · WIX XP Filter · Copper Drain Washer · FastFunnel · Gloves · Microfibre</div>
+          <div class="product-contents">
+            <span class="content-chip">Motul 300V</span>
+            <span class="content-chip">WIX XP</span>
+            <span class="content-chip">Drain Washer</span>
+            <span class="content-chip">Gloves</span>
+          </div>
+          <div class="product-price-row">
+            <div class="product-price">$223<sub>.98</sub></div>
+            <a href="#" class="btn-add">Add to Cart</a>
+          </div>
+        </div>
+      </a>
+
+      <!-- SC300 / SC400 — ECO -->
+      <a href="#" class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600&q=80" alt="ECO Oil Kit">
+          <span class="product-tier-badge eco">ECO / OEM</span>
+        </div>
+        <div class="product-card-body">
+          <div class="product-chassis-tag">Lexus SC300 / SC400</div>
+          <div class="product-name">ECO OEM Oil Change Kit</div>
+          <div class="product-desc">Motul 8100 ECO-lite 5W-30 · WIX Filter · Copper Drain Washer · FastFunnel · Gloves</div>
+          <div class="product-contents">
+            <span class="content-chip">Motul 8100</span>
+            <span class="content-chip">WIX Filter</span>
+            <span class="content-chip">Drain Washer</span>
+          </div>
+          <div class="product-price-row">
+            <div class="product-price">$111<sub>.98</sub></div>
+            <a href="#" class="btn-add">Add to Cart</a>
+          </div>
+        </div>
+      </a>
+
+      <!-- SC300 / SC400 — Street -->
+      <a href="#" class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600&q=80" alt="Street Oil Kit">
+          <span class="product-tier-badge street">Street</span>
+        </div>
+        <div class="product-card-body">
+          <div class="product-chassis-tag">Lexus SC300 / SC400</div>
+          <div class="product-name">OEM+ Oil Change Kit</div>
+          <div class="product-desc">Motul Nineties 10W-30 · WIX Filter · Drain Washer · FastFunnel · Gloves · Microfibre</div>
+          <div class="product-contents">
+            <span class="content-chip">Motul Nineties</span>
+            <span class="content-chip">WIX Filter</span>
+            <span class="content-chip">Microfibre</span>
+          </div>
+          <div class="product-price-row">
+            <div class="product-price">$128<sub>.98</sub></div>
+            <a href="#" class="btn-add">Add to Cart</a>
+          </div>
+        </div>
+      </a>
+
+      <!-- IS300 Track -->
+      <a href="#" class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600&q=80" alt="IS300 Track Kit">
+          <span class="product-tier-badge track">Track</span>
+        </div>
+        <div class="product-card-body">
+          <div class="product-chassis-tag">Lexus IS300</div>
+          <div class="product-name">Track / Purpose Built Oil Change Kit</div>
+          <div class="product-desc">Motul 300V 5W-40 · WIX XP Filter · Drain Washer · FastFunnel · Gloves · Microfibre</div>
+          <div class="product-contents">
+            <span class="content-chip">Motul 300V</span>
+            <span class="content-chip">WIX XP</span>
+            <span class="content-chip">5.3Qt capacity</span>
+          </div>
+          <div class="product-price-row">
+            <div class="product-price">$223<sub>.98</sub></div>
+            <a href="#" class="btn-add">Add to Cart</a>
+          </div>
+        </div>
+      </a>
+
+      <!-- IS300 ECO -->
+      <a href="#" class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600&q=80" alt="IS300 ECO Kit">
+          <span class="product-tier-badge eco">ECO / OEM</span>
+        </div>
+        <div class="product-card-body">
+          <div class="product-chassis-tag">Lexus IS300</div>
+          <div class="product-name">ECO OEM Oil Change Kit</div>
+          <div class="product-desc">Motul 8100 ECO-lite 5W-30 · WIX Filter · Drain Washer · Gloves</div>
+          <div class="product-contents">
+            <span class="content-chip">Motul 8100</span>
+            <span class="content-chip">WIX Filter</span>
+          </div>
+          <div class="product-price-row">
+            <div class="product-price">$108<sub>.98</sub></div>
+            <a href="#" class="btn-add">Add to Cart</a>
+          </div>
+        </div>
+      </a>
+
+      <!-- IS300 Street -->
+      <a href="#" class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600&q=80" alt="IS300 Street Kit">
+          <span class="product-tier-badge street">Street</span>
+          <span class="product-meta-badge">New</span>
+        </div>
+        <div class="product-card-body">
+          <div class="product-chassis-tag">Lexus IS300</div>
+          <div class="product-name">OEM+ Oil Change Kit</div>
+          <div class="product-desc">Motul Nineties 10W-30 · WIX Filter · Drain Washer · FastFunnel · Gloves</div>
+          <div class="product-contents">
+            <span class="content-chip">Motul Nineties</span>
+            <span class="content-chip">WIX Filter</span>
+          </div>
+          <div class="product-price-row">
+            <div class="product-price">$124<sub>.98</sub></div>
+            <a href="#" class="btn-add">Add to Cart</a>
+          </div>
+        </div>
+      </a>
+
+      <!-- SECTION HEADER: Toyota -->
+      <div class="product-section-divider">
+        <div class="psd-label">TOYOTA <em>KITS</em></div>
+        <div class="psd-line"></div>
+      </div>
+
+      <!-- GR86 Street -->
+      <a href="#" class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600&q=80" alt="GR86 Street Kit">
+          <span class="product-tier-badge street">Street</span>
+        </div>
+        <div class="product-card-body">
+          <div class="product-chassis-tag">Toyota GR86</div>
+          <div class="product-name">Street Performance Oil Change Kit</div>
+          <div class="product-desc">Motul 8100 X-Cess 5W-40 · WIX Filter · Copper Drain Washer · Gloves</div>
+          <div class="product-contents">
+            <span class="content-chip">Motul X-Cess</span>
+            <span class="content-chip">WIX Filter</span>
+            <span class="content-chip">5.4Qt</span>
+          </div>
+          <div class="product-price-row">
+            <div class="product-price">$116<sub>.98</sub></div>
+            <a href="#" class="btn-add">Add to Cart</a>
+          </div>
+        </div>
+      </a>
+
+      <!-- GR86 Track -->
+      <a href="#" class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600&q=80" alt="GR86 Track Kit">
+          <span class="product-tier-badge track">Track</span>
+        </div>
+        <div class="product-card-body">
+          <div class="product-chassis-tag">Toyota GR86</div>
+          <div class="product-name">Track / Purpose Built Oil Change Kit</div>
+          <div class="product-desc">Motul 300V 5W-40 · WIX XP Filter · Drain Washer · FastFunnel · Gloves · Microfibre</div>
+          <div class="product-contents">
+            <span class="content-chip">Motul 300V</span>
+            <span class="content-chip">WIX XP</span>
+          </div>
+          <div class="product-price-row">
+            <div class="product-price">$218<sub>.98</sub></div>
+            <a href="#" class="btn-add">Add to Cart</a>
+          </div>
+        </div>
+      </a>
+
+      <!-- Supra Mk4 Street -->
+      <a href="#" class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600&q=80" alt="Supra Mk4 Kit">
+          <span class="product-tier-badge street">Street</span>
+          <span class="product-meta-badge">Coming Soon</span>
+        </div>
+        <div class="product-card-body">
+          <div class="product-chassis-tag">Toyota Supra Mk4 · A80</div>
+          <div class="product-name">Street Performance Oil Change Kit</div>
+          <div class="product-desc">Motul 8100 X-Power 10W-60 · WIX Filter · Drain Washer · Gloves</div>
+          <div class="product-contents">
+            <span class="content-chip">Motul X-Power</span>
+            <span class="content-chip">2JZ-GTE spec</span>
+          </div>
+          <div class="product-price-row">
+            <div class="product-price">$132<sub>.98</sub></div>
+            <a href="#" class="btn-add">Add to Cart</a>
+          </div>
+        </div>
+      </a>
+
+    </div><!-- /products-grid -->
+  </div><!-- /product-main -->
+</div><!-- /shop-layout -->
+
+<!-- UPSELL BANNER -->
+<div class="upsell-banner">
+  <div class="upsell-left">
+    <div class="upsell-dot"></div>
+    <div>
+      <div class="upsell-text">Don't See Your Chassis?</div>
+      <div class="upsell-sub">More platforms added regularly — drop us a request and we'll spec it out</div>
+    </div>
+  </div>
+  <a href="adapt-contact.html" class="btn-outline-sm">Request a Chassis</a>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">ADAPT <span>PERFORMANCE</span></div>
+      <p class="footer-tagline">Chassis-specific maintenance kits and performance fluids for street and track builds.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/adaptperformance/" class="social-link">Instagram</a>
+        <a href="https://www.facebook.com/adaptandperform" class="social-link">Facebook</a>
+        <a href="#" class="social-link">YouTube</a>
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Lexus</p>
+      <ul class="footer-links">
+        <li><a href="#">IS300</a></li>
+        <li><a href="#">GS300 / GS400</a></li>
+        <li><a href="adapt-chassis-sc300-sc400.html">SC300 / SC400</a></li>
+        <li><a href="#">RC300 / RC350 / RC-F</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Shop</p>
+      <ul class="footer-links">
+        <li><a href="#">Toyota</a></li>
+        <li><a href="#">Honda</a></li>
+        <li><a href="#">Subaru</a></li>
+        <li><a href="#">BMW</a></li>
+        <li><a href="#">All Kits</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Support</p>
+      <ul class="footer-links">
+        <li><a href="#">Shipping &amp; Returns</a></li>
+        <li><a href="#">Warranty &amp; Liability</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="adapt-faqs.html">FAQs</a></li>
+        <li><a href="adapt-contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Adapt Performance Solutions LLC. All rights reserved.</p>
+    <ul class="footer-bottom-links">
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="adapt-contact.html">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+function switchCat(btn, cat) {
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  // In a live site, filter products here
+}
+
+function filterChassis(btn, chassis) {
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  // In a live site, show/hide product cards matching chassis
+}
+
+function toggleSidebar(btn) {
+  // Allow single-select per group
+  const group = btn.closest('.sidebar-group');
+  group.querySelectorAll('.sidebar-option').forEach(o => o.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+</script>
+
+</body>
+</html>

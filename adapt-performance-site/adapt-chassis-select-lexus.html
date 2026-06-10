@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lexus Chassis | Adapt Performance Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:         #0a0a0a;
+  --off-black:     #111111;
+  --carbon:        #1a1a1a;
+  --mid:           #2e2e2e;
+  --steel:         #3d3d3d;
+  --muted:         #888888;
+  --light-muted:   #aaaaaa;
+  --off-white:     #f0ede6;
+  --accent:        #c8a84b;
+  --accent-dim:    #8a6f2a;
+  --accent-bright: #e8c96a;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--off-white);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 64px;
+  background: rgba(10,10,10,0.94); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200,168,75,0.15);
+}
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.12em; color: var(--off-white); text-decoration: none; }
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--light-muted); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--accent); }
+.nav-cta { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--black); background: var(--accent); padding: 9px 22px; text-decoration: none; transition: background 0.2s; }
+.nav-cta:hover { background: var(--accent-bright); }
+
+/* ─── BREADCRUMB ─── */
+.breadcrumb { margin-top: 64px; padding: 16px 48px; background: var(--off-black); border-bottom: 1px solid rgba(200,168,75,0.08); display: flex; align-items: center; gap: 10px; }
+.breadcrumb a, .breadcrumb span { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--accent); }
+.breadcrumb .sep { color: rgba(200,168,75,0.3); }
+.breadcrumb span:last-child { color: var(--accent); }
+
+/* ─── BRAND HERO ─── */
+.brand-hero {
+  background: var(--off-black);
+  padding: 72px 48px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(200,168,75,0.1);
+}
+.brand-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(-15deg, transparent 0, transparent 48px, rgba(200,168,75,0.025) 48px, rgba(200,168,75,0.025) 49px);
+  pointer-events: none;
+}
+.brand-hero-inner {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+/* Left — brand identity + write-up */
+.brand-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 16px; display: flex; align-items: center; gap: 14px;
+}
+.brand-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--accent); }
+
+.brand-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(72px, 9vw, 120px);
+  line-height: 0.88; letter-spacing: 0.02em;
+  color: var(--off-white); margin-bottom: 10px;
+}
+.brand-subtitle {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px; font-weight: 500; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 32px;
+}
+
+.brand-writeup {
+  font-size: 15px; font-weight: 300;
+  color: var(--light-muted); line-height: 1.85;
+}
+.brand-writeup p { margin-bottom: 18px; }
+.brand-writeup p:last-child { margin-bottom: 0; }
+.brand-writeup strong { color: var(--off-white); font-weight: 400; }
+
+/* Right — quick stats */
+.brand-stats-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 12px;
+}
+.brand-stat-card {
+  background: var(--carbon);
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 24px 24px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.bsc-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 48px; letter-spacing: 0.04em;
+  color: rgba(200,168,75,0.25); line-height: 1;
+  flex-shrink: 0; min-width: 72px;
+}
+.bsc-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--off-white);
+  margin-bottom: 4px;
+}
+.bsc-desc { font-size: 12px; font-weight: 300; color: var(--muted); line-height: 1.5; }
+
+/* Chassis list preview strip */
+.brand-chassis-strip {
+  margin-top: 32px; padding-top: 28px;
+  border-top: 1px solid rgba(200,168,75,0.1);
+}
+.strip-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 14px;
+}
+.chassis-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.chassis-pill {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--light-muted);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 5px 12px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.chassis-pill:hover { border-color: rgba(200,168,75,0.3); color: var(--accent); }
+
+/* ─── CHASSIS SELECTOR ─── */
+.chassis-selector {
+  padding: 80px 48px;
+  background: var(--black);
+}
+.sel-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 48px;
+}
+.section-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 8px; display: flex; align-items: center; gap: 12px;
+}
+.section-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 48px; letter-spacing: 0.03em;
+  color: var(--off-white); line-height: 1;
+}
+.section-title em { font-style: normal; color: var(--accent); }
+.sel-note { font-size: 13px; font-weight: 300; color: var(--muted); text-align: right; max-width: 260px; line-height: 1.6; }
+
+/* Chassis cards */
+.chassis-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.chassis-card {
+  background: var(--carbon);
+  border: 1px solid transparent;
+  transition: border-color 0.25s, background 0.2s;
+  text-decoration: none;
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+}
+.chassis-card:hover {
+  border-color: rgba(200,168,75,0.3);
+  background: var(--mid);
+}
+.chassis-card.available-kits {
+  border-color: rgba(200,168,75,0.12);
+}
+
+.chassis-img-wrap {
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background: var(--mid);
+  position: relative;
+}
+.chassis-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease, opacity 0.3s;
+  opacity: 0.75;
+}
+.chassis-card:hover .chassis-img-wrap img {
+  transform: scale(1.04);
+  opacity: 0.9;
+}
+
+/* placeholder when no image */
+.chassis-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--carbon);
+}
+.chassis-img-placeholder span {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.08em;
+  color: rgba(200,168,75,0.15);
+}
+
+.kit-count-badge {
+  position: absolute;
+  bottom: 12px; left: 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--black); background: var(--accent);
+  padding: 4px 10px;
+}
+
+.chassis-card-body { padding: 22px 22px 24px; }
+
+.chassis-make-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 8px;
+}
+.chassis-card-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px; letter-spacing: 0.04em;
+  color: var(--off-white); line-height: 1;
+  margin-bottom: 4px;
+  transition: color 0.2s;
+}
+.chassis-card:hover .chassis-card-name { color: var(--accent); }
+.chassis-years {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.1em;
+  color: var(--muted); margin-bottom: 14px;
+}
+.chassis-engines-list {
+  font-size: 12px; font-weight: 300;
+  color: var(--muted); line-height: 1.6;
+  margin-bottom: 16px;
+}
+.chassis-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.chassis-tier-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tier-dot-tag {
+  display: flex; align-items: center; gap: 5px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+}
+.tier-dot-tag::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.6;
+}
+.chassis-arrow {
+  font-size: 16px; color: var(--accent);
+  opacity: 0; transition: opacity 0.2s, transform 0.2s;
+}
+.chassis-card:hover .chassis-arrow { opacity: 1; transform: translateX(4px); }
+
+/* coming soon state */
+.chassis-card.coming-soon { opacity: 0.55; cursor: default; }
+.chassis-card.coming-soon:hover { border-color: transparent; background: var(--carbon); }
+.coming-soon-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--muted);
+  border: 1px solid rgba(255,255,255,0.1); padding: 3px 10px;
+}
+
+/* ─── DIVIDER ─── */
+.section-divider { height: 1px; background: linear-gradient(to right, transparent, rgba(200,168,75,0.2), transparent); margin: 0 48px; }
+
+/* ─── FOOTER ─── */
+footer { background: var(--off-black); border-top: 1px solid rgba(200,168,75,0.15); padding: 56px 48px 32px; }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 0.12em; color: var(--off-white); margin-bottom: 16px; }
+.footer-logo span { color: var(--accent); }
+.footer-tagline { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.7; max-width: 220px; margin-bottom: 24px; }
+.footer-social { display: flex; gap: 12px; }
+.social-link { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.social-link:hover { color: var(--accent); }
+.footer-col-title { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid rgba(200,168,75,0.15); }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-links a { font-size: 13px; font-weight: 300; color: var(--muted); text-decoration: none; transition: color 0.2s; letter-spacing: 0.02em; }
+.footer-links a:hover { color: var(--off-white); }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.06); }
+.footer-copy { font-size: 11px; font-weight: 300; color: var(--muted); letter-spacing: 0.04em; }
+.footer-bottom-links { display: flex; gap: 20px; list-style: none; }
+.footer-bottom-links a { font-size: 11px; font-weight: 300; color: var(--muted); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+.footer-bottom-links a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="adapt-perform-homepage.html" class="nav-logo">ADAPT <span>PERFORMANCE</span></a>
+  <ul class="nav-links">
+    <li><a href="adapt-chassis-select-manufacturer.html" class="active">Chassis</a></li>
+    <li><a href="#">Maintenance</a></li>
+    <li><a href="#">Accessories</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="adapt-about.html">About</a></li>
+  </ul>
+  <a href="#chassis" class="nav-cta">Shop Kits</a>
+</nav>
+
+<div class="breadcrumb">
+  <a href="adapt-perform-homepage.html">Home</a>
+  <span class="sep">›</span>
+  <a href="adapt-chassis-select-manufacturer.html">Chassis</a>
+  <span class="sep">›</span>
+  <span>Lexus</span>
+</div>
+
+<!-- BRAND HERO -->
+<section class="brand-hero">
+  <div class="brand-hero-inner">
+
+    <!-- Left: Write-up -->
+    <div>
+      <p class="brand-eyebrow">Manufacturer Profile</p>
+      <h1 class="brand-title">LEXUS</h1>
+      <p class="brand-subtitle">Intelligent Sports · Luxury Performance · Japan</p>
+
+      <div class="brand-writeup">
+        <p>Refined luxury with track-honed precision — Lexus has built a performance legacy defined by balance, emotion, and driver connection. Each model represents a chapter in that story: machines engineered not just for power, but for the thrill of control behind the wheel.</p>
+        <p>The <strong>IS lineage</strong> brought precision and engagement to the compact sedan segment, blending nimble handling with Lexus's signature refinement. The <strong>GS</strong> carried performance into the executive class, merging smooth power delivery with chassis confidence for spirited grand touring. Meanwhile, the <strong>SC coupe</strong> offered elegant, driver-focused GT performance — a harmonious mix of style, comfort, and acceleration.</p>
+        <p>The <strong>RC and RC F</strong> take Lexus performance into the modern era. From the naturally aspirated GR V6 in the RC to the hand-built 5.0L V8 in the RC F, these cars deliver raw analog excitement. On track, the RC F GT500 dominated Super GT competition, proving Lexus can translate luxury into race-winning engineering.</p>
+      </div>
+
+      <div class="brand-chassis-strip">
+        <p class="strip-label">Chassis at Launch</p>
+        <div class="chassis-pills">
+          <span class="chassis-pill">IS300</span>
+          <span class="chassis-pill">GS300 / GS400</span>
+          <span class="chassis-pill">SC300 / SC400</span>
+          <span class="chassis-pill">RC300 / RC350</span>
+          <span class="chassis-pill">RC-F</span>
+          <span class="chassis-pill">IS-F</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Stats -->
+    <div class="brand-stats-col">
+      <div class="brand-stat-card">
+        <div class="bsc-num">6</div>
+        <div>
+          <div class="bsc-label">Chassis Covered</div>
+          <div class="bsc-desc">IS · GS · SC · RC · RC-F · IS-F — every performance platform spec'd individually</div>
+        </div>
+      </div>
+      <div class="brand-stat-card">
+        <div class="bsc-num">3</div>
+        <div>
+          <div class="bsc-label">Service Tiers</div>
+          <div class="bsc-desc">ECO / OEM · Street Performance · Track / Purpose Built</div>
+        </div>
+      </div>
+      <div class="brand-stat-card">
+        <div class="bsc-num">92</div>
+        <div>
+          <div class="bsc-label">Model Years Covered</div>
+          <div class="bsc-desc">1992 through present — from the original Z30 SC to the current RCF</div>
+        </div>
+      </div>
+      <div class="brand-stat-card" style="border-color:rgba(200,168,75,0.15);">
+        <div class="bsc-num" style="color:rgba(200,168,75,0.5);">2JZ</div>
+        <div>
+          <div class="bsc-label">Engines Spec'd</div>
+          <div class="bsc-desc">2JZ-GE · 1UZ-FE · 2JZ-GTE · 3GR-FSE · 5.0 2UR-GSE · more</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CHASSIS SELECTOR -->
+<section class="chassis-selector" id="chassis">
+  <div class="sel-header">
+    <div>
+      <p class="section-eyebrow">Select Chassis</p>
+      <h2 class="section-title">LEXUS <em>PLATFORMS</em></h2>
+    </div>
+    <p class="sel-note">Click a chassis to view available service kits, fluid specs, and part numbers.</p>
+  </div>
+
+  <div class="chassis-grid">
+
+    <!-- SC300 / SC400 — has live page -->
+    <a href="adapt-chassis-sc300-sc400.html" class="chassis-card available-kits">
+      <div class="chassis-img-wrap">
+        <div class="chassis-img-placeholder"><span>SC300 / SC400</span></div>
+        <span class="kit-count-badge">Kits Available</span>
+      </div>
+      <div class="chassis-card-body">
+        <div class="chassis-make-tag">Lexus</div>
+        <div class="chassis-card-name">SC300 / SC400</div>
+        <div class="chassis-years">1992 – 2000 · Z30 Platform</div>
+        <div class="chassis-engines-list">2JZ-GE I6 DOHC · 1UZ-FE V8 DOHC<br>5-speed W58 · 4-speed A340 · 5-speed A650</div>
+        <div class="chassis-card-footer">
+          <div class="chassis-tier-tags">
+            <span class="tier-dot-tag">ECO</span>
+            <span class="tier-dot-tag">Street</span>
+            <span class="tier-dot-tag">Track</span>
+          </div>
+          <span class="chassis-arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- IS300 -->
+    <a href="#" class="chassis-card available-kits">
+      <div class="chassis-img-wrap">
+        <div class="chassis-img-placeholder"><span>IS300</span></div>
+        <span class="kit-count-badge">Kits Available</span>
+      </div>
+      <div class="chassis-card-body">
+        <div class="chassis-make-tag">Lexus</div>
+        <div class="chassis-card-name">IS300</div>
+        <div class="chassis-years">2001 – 2005 · XE10 Platform</div>
+        <div class="chassis-engines-list">2JZ-GE I6 DOHC 3.0L<br>5-speed AR5 Manual · 5-speed A650E Auto</div>
+        <div class="chassis-card-footer">
+          <div class="chassis-tier-tags">
+            <span class="tier-dot-tag">ECO</span>
+            <span class="tier-dot-tag">Street</span>
+            <span class="tier-dot-tag">Track</span>
+          </div>
+          <span class="chassis-arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- GS300 / GS400 -->
+    <a href="#" class="chassis-card available-kits">
+      <div class="chassis-img-wrap">
+        <div class="chassis-img-placeholder"><span>GS300 / GS400</span></div>
+        <span class="kit-count-badge">Kits Available</span>
+      </div>
+      <div class="chassis-card-body">
+        <div class="chassis-make-tag">Lexus</div>
+        <div class="chassis-card-name">GS300 / GS400</div>
+        <div class="chassis-years">1993 – 2005 · Z30 / S160 Platform</div>
+        <div class="chassis-engines-list">2JZ-GE I6 3.0L · 1UZ-FE V8 4.0L<br>5-speed A650 · 4-speed A340 Auto</div>
+        <div class="chassis-card-footer">
+          <div class="chassis-tier-tags">
+            <span class="tier-dot-tag">ECO</span>
+            <span class="tier-dot-tag">Street</span>
+          </div>
+          <span class="chassis-arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- RC300 / RC350 -->
+    <a href="#" class="chassis-card available-kits">
+      <div class="chassis-img-wrap">
+        <div class="chassis-img-placeholder"><span>RC300 / RC350</span></div>
+        <span class="kit-count-badge">Kits Available</span>
+      </div>
+      <div class="chassis-card-body">
+        <div class="chassis-make-tag">Lexus</div>
+        <div class="chassis-card-name">RC300 / RC350</div>
+        <div class="chassis-years">2015 – Present · GSC10 Platform</div>
+        <div class="chassis-engines-list">3GR-FSE V6 3.0L · 2GR-FSE V6 3.5L<br>8-speed AB60E Auto</div>
+        <div class="chassis-card-footer">
+          <div class="chassis-tier-tags">
+            <span class="tier-dot-tag">ECO</span>
+            <span class="tier-dot-tag">Street</span>
+            <span class="tier-dot-tag">Track</span>
+          </div>
+          <span class="chassis-arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- RC-F -->
+    <a href="#" class="chassis-card available-kits">
+      <div class="chassis-img-wrap">
+        <div class="chassis-img-placeholder"><span>RC-F</span></div>
+        <span class="kit-count-badge">Kits Available</span>
+      </div>
+      <div class="chassis-card-body">
+        <div class="chassis-make-tag">Lexus</div>
+        <div class="chassis-card-name">RC-F</div>
+        <div class="chassis-years">2015 – Present · GSC10 Platform</div>
+        <div class="chassis-engines-list">2UR-GSE V8 5.0L DOHC 32v<br>8-speed paddle-shift auto</div>
+        <div class="chassis-card-footer">
+          <div class="chassis-tier-tags">
+            <span class="tier-dot-tag">Street</span>
+            <span class="tier-dot-tag">Track</span>
+          </div>
+          <span class="chassis-arrow">→</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- IS-F — coming soon -->
+    <div class="chassis-card coming-soon">
+      <div class="chassis-img-wrap">
+        <div class="chassis-img-placeholder"><span>IS-F</span></div>
+      </div>
+      <div class="chassis-card-body">
+        <div class="chassis-make-tag">Lexus</div>
+        <div class="chassis-card-name">IS-F</div>
+        <div class="chassis-years">2008 – 2014 · XE20 Platform</div>
+        <div class="chassis-engines-list">2UR-GSE V8 5.0L DOHC<br>8-speed sequential auto</div>
+        <div class="chassis-card-footer">
+          <div class="chassis-tier-tags">
+            <span class="coming-soon-tag">Coming Soon</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">ADAPT <span>PERFORMANCE</span></div>
+      <p class="footer-tagline">Chassis-specific maintenance kits and performance fluids for street and track builds.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/adaptperformance/" class="social-link">Instagram</a>
+        <a href="https://www.facebook.com/adaptandperform" class="social-link">Facebook</a>
+        <a href="#" class="social-link">YouTube</a>
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Lexus</p>
+      <ul class="footer-links">
+        <li><a href="#">IS300</a></li>
+        <li><a href="#">GS300 / GS400</a></li>
+        <li><a href="adapt-chassis-sc300-sc400.html">SC300 / SC400</a></li>
+        <li><a href="#">RC300 / RC350 / RC-F</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Shop</p>
+      <ul class="footer-links">
+        <li><a href="#">Toyota</a></li>
+        <li><a href="#">Honda</a></li>
+        <li><a href="#">Subaru</a></li>
+        <li><a href="#">BMW</a></li>
+        <li><a href="#">All Kits</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Support</p>
+      <ul class="footer-links">
+        <li><a href="#">Shipping &amp; Returns</a></li>
+        <li><a href="#">Warranty &amp; Liability</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="adapt-faqs.html">FAQs</a></li>
+        <li><a href="adapt-contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Adapt Performance Solutions LLC. All rights reserved.</p>
+    <ul class="footer-bottom-links">
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="adapt-contact.html">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>

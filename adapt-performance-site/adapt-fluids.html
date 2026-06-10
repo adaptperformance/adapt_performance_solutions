@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Performance Fluids | Adapt Performance Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--black:#0a0a0a;--off-black:#111;--carbon:#1a1a1a;--mid:#2e2e2e;--muted:#888;--light-muted:#aaa;--off-white:#f0ede6;--accent:#c8a84b;--accent-bright:#e8c96a}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--off-white);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:hidden}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;background:rgba(10,10,10,.94);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,168,75,.15)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.12em;color:var(--off-white);text-decoration:none}.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--light-muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+.nav-cta{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--black);background:var(--accent);padding:9px 22px;text-decoration:none;transition:background .2s}
+.nav-cta:hover{background:var(--accent-bright)}
+
+/* ── BREADCRUMB ── */
+.breadcrumb{margin-top:64px;padding:16px 48px;background:var(--off-black);border-bottom:1px solid rgba(200,168,75,.08);display:flex;align-items:center;gap:10px}
+.breadcrumb a,.breadcrumb span{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.breadcrumb a:hover{color:var(--accent)}.breadcrumb .sep{color:rgba(200,168,75,.3)}.breadcrumb span:last-child{color:var(--accent)}
+
+/* ── HERO ── */
+.page-hero{background:var(--off-black);padding:72px 48px 64px;position:relative;overflow:hidden;border-bottom:1px solid rgba(200,168,75,.1)}
+.page-hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-15deg,transparent 0,transparent 48px,rgba(200,168,75,.025) 48px,rgba(200,168,75,.025) 49px);pointer-events:none}
+.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--accent)}
+.page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,7vw,92px);line-height:.9;letter-spacing:.02em;color:var(--off-white);margin-bottom:20px}
+.page-title em{font-style:normal;color:var(--accent)}
+.page-sub{font-size:15px;font-weight:300;color:var(--light-muted);line-height:1.7;max-width:420px}
+.hero-brand-list{display:flex;flex-direction:column;gap:2px}
+.brand-row{background:var(--carbon);padding:20px 24px;border:1px solid rgba(255,255,255,.04);display:flex;align-items:center;justify-content:space-between}
+.brand-row-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.06em;color:var(--off-white)}
+.brand-row-desc{font-size:12px;font-weight:300;color:var(--muted);text-align:right;max-width:220px;line-height:1.5}
+
+/* ── CATEGORY TABS ── */
+.cat-nav{background:var(--black);padding:0 48px;border-bottom:1px solid rgba(200,168,75,.08);display:flex;gap:0;position:sticky;top:64px;z-index:90}
+.cat-tab{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:18px 28px;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;text-decoration:none;display:block}
+.cat-tab:hover{color:var(--off-white)}.cat-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+
+/* ── SHARED ── */
+.section-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:32px;display:flex;align-items:center;gap:12px}
+.section-label::before{content:'';display:block;width:24px;height:1px;background:var(--accent)}
+.section-divider{height:1px;background:linear-gradient(to right,transparent,rgba(200,168,75,.2),transparent);margin:0 48px}
+.section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:.03em;color:var(--off-white);line-height:1}
+.section-title em{font-style:normal;color:var(--accent)}
+.section-note{font-size:13px;font-weight:300;color:var(--muted);max-width:240px;text-align:right;line-height:1.6}
+
+/* ── PRODUCT GRID ── */
+.fluid-section{padding:64px 48px}
+.fluid-section:nth-child(even){background:var(--off-black)}
+.fluid-section:nth-child(odd){background:var(--black)}
+.cat-label{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);border-bottom:1px solid rgba(200,168,75,.15);padding-bottom:14px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center}
+.cat-label-note{font-size:11px;font-weight:400;color:var(--muted);text-transform:none;letter-spacing:.04em}
+.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-bottom:32px}
+.product-card{background:var(--carbon);padding:24px 20px;border:1px solid transparent;transition:border-color .2s,background .2s;cursor:pointer}
+.product-card:hover{border-color:rgba(200,168,75,.25);background:var(--mid)}
+.product-brand{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.product-name{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:600;color:var(--off-white);margin-bottom:4px;line-height:1.25}
+.product-size{font-size:12px;font-weight:300;color:var(--muted);margin-bottom:4px}
+.product-spec{font-size:11px;font-weight:300;color:rgba(136,136,136,.7);margin-bottom:18px;line-height:1.5}
+.product-price-row{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid rgba(255,255,255,.05)}
+.product-price{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.04em;color:var(--off-white)}
+.btn-add{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);background:transparent;border:1px solid rgba(255,255,255,.1);padding:8px 14px;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+.btn-add:hover{color:var(--black);background:var(--accent);border-color:var(--accent)}
+
+/* ── FOOTER ── */
+footer{background:var(--off-black);border-top:1px solid rgba(200,168,75,.15);padding:56px 48px 32px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.12em;color:var(--off-white);margin-bottom:16px}.footer-logo span{color:var(--accent)}
+.footer-tagline{font-size:13px;font-weight:300;color:var(--muted);line-height:1.7;max-width:220px;margin-bottom:24px}
+.footer-social{display:flex;gap:12px}
+.social-link{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}.social-link:hover{color:var(--accent)}
+.footer-col-title{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a{font-size:13px;font-weight:300;color:var(--muted);text-decoration:none;transition:color .2s}.footer-links a:hover{color:var(--off-white)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:1px solid rgba(255,255,255,.05)}
+.footer-copy{font-size:12px;font-weight:300;color:rgba(136,136,136,.6)}
+.footer-bottom-links{display:flex;gap:24px;list-style:none}
+.footer-bottom-links a{font-size:12px;font-weight:300;color:rgba(136,136,136,.6);text-decoration:none;transition:color .2s}.footer-bottom-links a:hover{color:var(--muted)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="adapt-perform-homepage.html" class="nav-logo">ADAPT <span>PERFORMANCE</span></a>
+  <ul class="nav-links">
+    <li><a href="adapt-all-chassis.html">Chassis</a></li>
+    <li><a href="adapt-service-kits.html">Maintenance</a></li>
+    <li><a href="#" class="active">Accessories</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="adapt-about.html">About</a></li>
+  </ul>
+  <a href="adapt-all-chassis.html" class="nav-cta">Find My Kit</a>
+</nav>
+
+<div class="breadcrumb">
+  <a href="adapt-perform-homepage.html">Home</a>
+  <span class="sep">›</span>
+  <a href="#">Accessories</a>
+  <span class="sep">›</span>
+  <span>Fluids</span>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="hero-inner">
+    <div>
+      <p class="eyebrow">Accessories · Standalone Fluids</p>
+      <h1 class="page-title">PERFOR-<br>MANCE<br><em>FLUIDS.</em></h1>
+      <p class="page-sub">Sourced for thermal stability, compatibility, and real-world performance. Every fluid in our catalog is selected because it earns its spot under load — not because of margin.</p>
+    </div>
+    <div class="hero-brand-list">
+      <div class="brand-row">
+        <div class="brand-row-name">MOTUL</div>
+        <div class="brand-row-desc">Engine oil, gear oil, brake fluid, ATF — the full fluid ecosystem</div>
+      </div>
+      <div class="brand-row">
+        <div class="brand-row-name">ELF</div>
+        <div class="brand-row-desc">OEM-grade brake fluid and hydraulic fluids</div>
+      </div>
+      <div class="brand-row">
+        <div class="brand-row-name">MOTUL ADDITIVES</div>
+        <div class="brand-row-desc">Engine clean, leak stop, fuel system treatment</div>
+      </div>
+      <div class="brand-row" style="border:1px solid rgba(200,168,75,.15);background:rgba(200,168,75,.04)">
+        <div class="brand-row-name" style="color:rgba(200,168,75,.4)">MORE COMING</div>
+        <div class="brand-row-desc">Expanding catalog regularly</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORY NAV -->
+<div class="cat-nav">
+  <a href="#engine-oil" class="cat-tab active">Engine Oil</a>
+  <a href="#gear-oil" class="cat-tab">Gear &amp; Trans</a>
+  <a href="#brake-fluid" class="cat-tab">Brake Fluid</a>
+  <a href="#additives" class="cat-tab">Additives</a>
+  <a href="#coolant" class="cat-tab">Coolant</a>
+</div>
+
+<!-- ENGINE OIL -->
+<section class="fluid-section" id="engine-oil">
+  <div class="section-header">
+    <div>
+      <p class="section-label">Engine Oil</p>
+      <h2 class="section-title">MOTUL<br><em>300V / 8100</em></h2>
+    </div>
+    <p class="section-note">Race-ester and full synthetic engine oils. From daily drivers to all-out track builds.</p>
+  </div>
+
+  <div class="cat-label">300V Competition / Racing Series <span class="cat-label-note">Ester-based · Race &amp; High-Performance</span></div>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-brand">Motul</div>
+      <div class="product-name">300V Competition 15W-50</div>
+      <div class="product-size">2L</div>
+      <div class="product-spec">Ester-based racing oil · High-rpm and boosted engines</div>
+      <div class="product-price-row"><div class="product-price">$42.98</div><a href="https://www.adapt-perform.com/product-page/motul-300v-competition-15w-50-2l" target="_blank" class="btn-add">Add</a></div>
+    </div>
+    <div class="product-card">
+      <div class="product-brand">Motul</div>
+      <div class="product-name">300V Competition 5W-40</div>
+      <div class="product-size">2L</div>
+      <div class="product-spec">Ester-based · Turbo &amp; NA high-output engines</div>
+      <div class="product-price-row"><div class="product-price">$42.98</div><a href="https://www.adapt-perform.com/product-page/motul-300v-competition-5w-40-2l" target="_blank" class="btn-add">Add</a></div>
+    </div>
+    <div class="product-card">
+      <div class="product-brand">Motul</div>
+      <div class="product-name">300V Power 5W-30</div>
+      <div class="product-size">2L</div>
+      <div class="product-spec">Ester-based · Street performance and track use</div>
+      <div class="product-price-row"><div class="product-price">$42.98</div><a href="https://www.adapt-perform.com/product-page/motul-300v-power-5w-30-2l" target="_blank" class="btn-add">Add</a></div>
+    </div>
+    <div class="product-card">
+      <div class="product-brand">Motul</div>
+      <div class="product-name">300V Chrono 10W-40</div>
+      <div class="product-size">2L</div>
+      <div class="product-spec">Ester-based · Endurance racing spec</div>
+      <div class="product-price-row"><div class="product-price">$42.98</div><a href="#" class="btn-add">Add</a></div>
+    </div>
+  </div>
+
+  <div class="cat-label">8100 Series <span class="cat-label-note">100% Synthetic · Street &amp; OEM+</span></div>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-brand">Motul</div>
+      <div class="product-name">8100 X-clean+ 5W-30</div>
+      <div class="product-size">1L / 5L</div>
+      <div class="product-spec">100% synthetic · Low-SAPS · Modern turbo petrol &amp; diesel</div>
+      <div class="product-price-row"><div class="product-price">$14.98</div><a href="#" class="btn-add">Add</a></div>
+    </div>
+    <div class="product-card">
+      <div class="product-brand">Motul</div>
+      <div class="product-name">8100 X-cess 5W-40</div>
+      <div class="product-size">1L / 5L</div>
+      <div class="product-spec">100% synthetic · Performance engines · High displacement</div>
+      <div class="product-price-row"><div class="product-price">$15.98</div><a href="#" class="btn-add">Add</a></div>
+    </div>
+    <div class="product-card">
+      <div class="product-brand">Motul</div>
+      <div class="product-name">8100 ECO-lite 0W-20</div>
+      <div class="product-size">1L / 5L</div>
+      <div class="product-spec">100% synthetic · Modern fuel-economy spec · OEM tier</div>
+      <div class="product-price-row"><div class="product-price">$13.98</div><a href="#" class="btn-add">Add</a></div>
+    </div>
+    <div class="product-card">
+      <div class="product-brand">Motul</div>
+      <div class="product-name">8100 X-max 0W-40</div>
+      <div class="product-size">1L / 5L</div>
+      <div class="product-spec">100% synthetic · European performance spec · BMW / Porsche</div>
+      <div class="product-price-row"><div class="product-price">$16.98</div><a href="#" class="btn-add">Add</a></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- GEAR & TRANS -->
+<section class="fluid-section" id="gear-oil">
+  <div class="section-header">
+    <div>
+      <p class="section-label">Gear &amp; Transmission</p>
+      <h2 class="section-title">MOTUL<br><em>GEAR 300</em></h2>
+    </div>
+    <p class="section-note">Manual trans, differential, and ATF — spec'd for GL-4/5 and OEM ATF applications.</p>
+  </div>
+
+  <div class="cat-label">Manual Transmission &amp; Differential <span class="cat-label-note">GL-4 / GL-5 · 75W-90 / 75W-140</span></div>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-brand">Motul</div>
+      <div class="product-name">Gear 300 75W-90</div>
+      <div class="product-size">1L</div>
+      <div class="product-spec">100% synthetic GL-4/5 · W58, B16, K20 gearboxes</div>
+      <div class="product-price-row"><div class="product-price">$25.98</div><a href="https://www.adapt-perform.com/product-page/motul-gear-300-75w-90-1l" target="_blank" class="btn-add">Add</a></div>
+    </div>
+    <div class="product-card">
+      <div class="product-brand">Motul</div>
+      <div class="product-name">Gear 300 LS 75W-90</div>
+      <div class="product-size">1L</div>
+      <div class="product-spec">100% synthetic GL-5 · LSD-compatible · Rear differentials</div>
+      <div class="product-price-row"><div class="product-price">$27.98</div><a href="https://www.adapt-perform.com/product-page/motul-gear-300-ls-75w-90-1l" target="_blank" class="btn-add">Add</a></div>
+    </div>
+    <div class="product-card">
+      <div class="product-brand">Motul</div>
+      <div class="product-name">Gear 300 Competition 75W-140</div>
+      <div class="product-size">1L</div>
+      <div class="product-spec">100% synthetic GL-5 · Track &amp; race diff spec</div>
+      <div class="product-price-row"><div class="product-price">$28.98</div><a href="https://www.adapt-perform.com/product-page/motul-gear-300-competition-75w-140-1l" target="_blank" class="btn-add">Add</a></div>
+    </div>
+    <div class="product-card">
+      <div class="product-brand">Motul</div>
+      <div class="product-name">Multi ATF</div>
+      <div class="product-size">1L</div>
+      <div class="product-spec">Synthetic ATF · A340, A650, DEXRON-3 compatible</div>
+      <div class="product-price-row"><div class="product-price">$14.48</div><a href="https://www.adapt-perform.com/product-page/motul-multi-atf-1l" target="_blank" class="btn-add">Add</a></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- BRAKE FLUID -->
+<section class="fluid-section" id="brake-fluid">
+  <div class="section-header">
+    <div>
+      <p class="section-label">Brake Fluid</p>
+      <h2 class="section-title">DOT 4 —<br><em>RBF 660</em></h2>
+    </div>
+    <p class="section-note">From street-grade DOT 4 to track-spec RBF 660. Match your fluid to your heat demands.</p>
+  </div>
+
+  <div class="cat-label">Street Brake Fluid <span class="cat-label-note">DOT 4 / DOT 5.1 · Street &amp; OEM+</span></div>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-brand">Elf</div>
+      <div class="product-name">Brake Fluid DOT 4</div>
+      <div class="product-size">0.500L</div>
+      <div class="product-spec">OEM-grade · Street &amp; OEM+ builds · General service</div>
+      <div class="product-price-row"><div class="product-price">$8.98</div><a href="https://www.adapt-perform.com/product-page/elf-brake-fluid-dot-4-0500l" target="_blank" class="btn-add">Add</a></div>
+    </div>
+    <div class="product-card">
+      <div class="product-brand">Motul</div>
+      <div class="product-name">DOT 5.1</div>
+      <div class="product-size">0.500L</div>
+      <div class="product-spec">High boiling point · Synthetic · OEM+ and spirited street</div>
+      <div class="product-price-row"><div class="product-price">$10.98</div><a href="https://www.adapt-perform.com/product-page/motul-dot51-0500l" target="_blank" class="btn-add">Add</a></div>
+    </div>
+    <div class="product-card" style="opacity:.5;pointer-events:none">
+      <div class="product-brand">Motul</div>
+      <div class="product-name">DOT 4 LV</div>
+      <div class="product-size">0.500L</div>
+      <div class="product-spec">Low-viscosity · Modern ABS/ESP systems · Coming soon</div>
+      <div class="product-price-row"><div class="product-price">—</div><span class="btn-add" style="cursor:default">Soon</span></div>
+    </div>
+    <div class="product-card" style="opacity:.5;pointer-events:none">
+      <div class="product-brand">—</div>
+      <div class="product-name">Expanding</div>
+      <div class="product-size">—</div>
+      <div class="product-spec">More brake fluid options being added</div>
+      <div class="product-price-row"><div class="product-price">—</div></div>
+    </div>
+  </div>
+
+  <div class="cat-label">Track Brake Fluid <span class="cat-label-note">RBF 600 / RBF 660 · Track Day &amp; Race</span></div>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-brand">Motul</div>
+      <div class="product-name">RBF 600 Factory Line</div>
+      <div class="product-size">0.500L</div>
+      <div class="product-spec">Dry boiling: 593°F / 312°C · Wet: 421°F / 216°C · Track &amp; endurance</div>
+      <div class="product-price-row"><div class="product-price">$21.98</div><a href="https://www.adapt-perform.com/product-page/motul-rbf-600-factory-line-0500l" target="_blank" class="btn-add">Add</a></div>
+    </div>
+    <div class="product-card">
+      <div class="product-brand">Motul</div>
+      <div class="product-name">RBF 660 Factory Line</div>
+      <div class="product-size">0.500L</div>
+      <div class="product-spec">Dry boiling: 660°F / 325°C · Wet: 421°F · Full race spec</div>
+      <div class="product-price-row"><div class="product-price">$29.98</div><a href="https://www.adapt-perform.com/product-page/motul-rbf-660-factory-line-0500l" target="_blank" class="btn-add">Add</a></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ADDITIVES -->
+<section class="fluid-section" id="additives">
+  <div class="section-header">
+    <div>
+      <p class="section-label">Additives</p>
+      <h2 class="section-title">ENGINE<br><em>TREATMENTS</em></h2>
+    </div>
+    <p class="section-note">Motul engine treatments — clean, protect, and condition between service intervals.</p>
+  </div>
+
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-brand">Motul</div>
+      <div class="product-name">Engine Clean</div>
+      <div class="product-size">300mL</div>
+      <div class="product-spec">Pre-oil-change engine flush · Clears sludge and deposits</div>
+      <div class="product-price-row"><div class="product-price">$14.98</div><a href="#" class="btn-add">Add</a></div>
+    </div>
+    <div class="product-card">
+      <div class="product-brand">Motul</div>
+      <div class="product-name">Engine Leak Stop</div>
+      <div class="product-size">300mL</div>
+      <div class="product-spec">Seal conditioner · Stops minor oil seepage · OEM+ safe</div>
+      <div class="product-price-row"><div class="product-price">$14.98</div><a href="#" class="btn-add">Add</a></div>
+    </div>
+    <div class="product-card">
+      <div class="product-brand">Motul</div>
+      <div class="product-name">Fuel System Clean</div>
+      <div class="product-size">300mL</div>
+      <div class="product-spec">Injector cleaner · Combustion chamber deposit removal</div>
+      <div class="product-price-row"><div class="product-price">$13.98</div><a href="#" class="btn-add">Add</a></div>
+    </div>
+    <div class="product-card">
+      <div class="product-brand">Motul</div>
+      <div class="product-name">Motyl-Gom</div>
+      <div class="product-size">200mL</div>
+      <div class="product-spec">Rubber seal revitalizer · Transmission and diff seals</div>
+      <div class="product-price-row"><div class="product-price">$12.98</div><a href="#" class="btn-add">Add</a></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- COOLANT -->
+<section class="fluid-section" id="coolant">
+  <div class="section-header">
+    <div>
+      <p class="section-label">Coolant</p>
+      <h2 class="section-title">INUGEL<br><em>OPTIMAL</em></h2>
+    </div>
+    <p class="section-note">OEM-compatible and track-grade coolant solutions. Coming soon to the catalog.</p>
+  </div>
+  <div style="background:var(--carbon);border:1px solid rgba(200,168,75,.15);padding:48px 40px;display:flex;align-items:center;justify-content:space-between;gap:32px">
+    <div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:.04em;color:rgba(200,168,75,.4);margin-bottom:10px">EXPANDING THE CATALOG</div>
+      <p style="font-size:14px;font-weight:300;color:var(--muted);line-height:1.7;max-width:520px">Coolant and water wetter products — Motul Inugel Optimal and track-grade variants — are being added. Get notified when they go live.</p>
+    </div>
+    <button style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);background:transparent;border:1px solid rgba(200,168,75,.3);padding:13px 28px;cursor:pointer;white-space:nowrap;transition:all .2s" onmouseover="this.style.background='rgba(200,168,75,.1)'" onmouseout="this.style.background='transparent'">Notify Me</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">ADAPT <span>PERFORMANCE</span></div>
+      <p class="footer-tagline">Chassis-specific maintenance kits and performance fluids for street and track builds.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/adaptperformance/" class="social-link">Instagram</a>
+        <a href="https://www.facebook.com/adaptandperform" class="social-link">Facebook</a>
+        <a href="#" class="social-link">YouTube</a>
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Fluids</p>
+      <ul class="footer-links">
+        <li><a href="#engine-oil">Engine Oil</a></li>
+        <li><a href="#gear-oil">Gear &amp; Trans</a></li>
+        <li><a href="#brake-fluid">Brake Fluid</a></li>
+        <li><a href="#additives">Additives</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Shop</p>
+      <ul class="footer-links">
+        <li><a href="adapt-service-kits.html">Service Kits</a></li>
+        <li><a href="adapt-all-chassis.html">All Chassis</a></li>
+        <li><a href="adapt-perform-homepage.html">Home</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Support</p>
+      <ul class="footer-links">
+        <li><a href="adapt-faqs.html">FAQs</a></li>
+        <li><a href="adapt-contact.html">Contact Us</a></li>
+        <li><a href="#">Shipping &amp; Returns</a></li>
+        <li><a href="adapt-about.html">About Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Adapt Performance Solutions LLC. All rights reserved.</p>
+    <ul class="footer-bottom-links"><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="adapt-contact.html">Contact</a></li></ul>
+  </div>
+</footer>
+
+<script>
+const tabs = document.querySelectorAll('.cat-tab');
+const sections = ['engine-oil','gear-oil','brake-fluid','additives','coolant'];
+window.addEventListener('scroll', () => {
+  let current = sections[0];
+  sections.forEach(id => { const el = document.getElementById(id); if(el && window.scrollY >= el.offsetTop - 100) current = id; });
+  tabs.forEach(t => { t.classList.remove('active'); if(t.getAttribute('href') === '#'+current) t.classList.add('active'); });
+});
+</script>
+</body>
+</html>

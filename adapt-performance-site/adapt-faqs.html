@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FAQs | Adapt Performance Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--black:#0a0a0a;--off-black:#111;--carbon:#1a1a1a;--mid:#2e2e2e;--muted:#888;--light-muted:#aaa;--off-white:#f0ede6;--accent:#c8a84b;--accent-bright:#e8c96a}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--off-white);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;background:rgba(10,10,10,.94);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,168,75,.15)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.12em;color:var(--off-white);text-decoration:none}.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--light-muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+.nav-cta{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--black);background:var(--accent);padding:9px 22px;text-decoration:none;transition:background .2s}
+.nav-cta:hover{background:var(--accent-bright)}
+
+.breadcrumb{margin-top:64px;padding:16px 48px;background:var(--off-black);border-bottom:1px solid rgba(200,168,75,.08);display:flex;align-items:center;gap:10px}
+.breadcrumb a,.breadcrumb span{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.breadcrumb a:hover{color:var(--accent)}.breadcrumb .sep{color:rgba(200,168,75,.3)}.breadcrumb span:last-child{color:var(--accent)}
+
+/* ── HERO ── */
+.page-hero{background:var(--off-black);padding:80px 48px 72px;position:relative;overflow:hidden;border-bottom:1px solid rgba(200,168,75,.1)}
+.page-hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-15deg,transparent 0,transparent 48px,rgba(200,168,75,.025) 48px,rgba(200,168,75,.025) 49px);pointer-events:none}
+.page-hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--accent)}
+.page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,7vw,96px);line-height:.9;letter-spacing:.02em;color:var(--off-white);margin-bottom:20px}
+.page-title em{font-style:normal;color:var(--accent)}
+.page-sub{font-size:15px;font-weight:300;color:var(--light-muted);line-height:1.7;margin-bottom:32px;max-width:420px}
+.hero-search{display:flex;gap:0;max-width:420px}
+.hero-search input{flex:1;background:var(--carbon);border:1px solid rgba(255,255,255,.1);border-right:none;padding:13px 18px;font-family:'Barlow',sans-serif;font-size:14px;font-weight:300;color:var(--off-white);outline:none;transition:border-color .2s}
+.hero-search input::placeholder{color:var(--muted)}
+.hero-search input:focus{border-color:rgba(200,168,75,.4)}
+.hero-search button{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--black);background:var(--accent);border:none;padding:13px 22px;cursor:pointer;transition:background .2s;white-space:nowrap}
+.hero-search button:hover{background:var(--accent-bright)}
+
+.hero-cats{display:flex;flex-direction:column;gap:2px}
+.cat-link{background:var(--carbon);padding:18px 22px;border:1px solid transparent;text-decoration:none;display:flex;align-items:center;justify-content:space-between;transition:border-color .2s,background .2s}
+.cat-link:hover{border-color:rgba(200,168,75,.2);background:var(--mid)}
+.cat-link-left{display:flex;align-items:center;gap:14px}
+.cat-link-icon{font-size:18px;width:36px;text-align:center}
+.cat-link-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--off-white)}
+.cat-link-count{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:500;letter-spacing:.1em;color:var(--muted)}
+.cat-link-arrow{color:var(--accent);opacity:0;transition:opacity .2s,transform .2s;font-size:16px}
+.cat-link:hover .cat-link-arrow{opacity:1;transform:translateX(4px)}
+
+/* ── FAQ BODY ── */
+.faq-layout{display:grid;grid-template-columns:220px 1fr;gap:0;padding:64px 48px;background:var(--black)}
+.faq-sidebar{position:sticky;top:88px;align-self:start;display:flex;flex-direction:column;gap:2px;padding-right:40px}
+.sidebar-label{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(200,168,75,.15)}
+.sidebar-link{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:9px 12px;border-left:2px solid transparent;transition:all .2s;display:block}
+.sidebar-link:hover{color:var(--off-white);border-left-color:rgba(200,168,75,.3)}
+.sidebar-link.active{color:var(--accent);border-left-color:var(--accent)}
+
+.faq-content{display:flex;flex-direction:column;gap:48px}
+.faq-group{}
+.faq-group-title{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:.04em;color:var(--off-white);margin-bottom:4px}
+.faq-group-title em{font-style:normal;color:var(--accent)}
+.faq-group-sub{font-size:13px;font-weight:300;color:var(--muted);margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(200,168,75,.1)}
+.faq-list{display:flex;flex-direction:column;gap:2px}
+
+/* Accordion */
+.faq-item{background:var(--carbon);border:1px solid transparent;transition:border-color .2s;overflow:hidden}
+.faq-item.open{border-color:rgba(200,168,75,.2)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;cursor:pointer;gap:16px;user-select:none}
+.faq-q-text{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;letter-spacing:.04em;color:var(--off-white);line-height:1.3}
+.faq-item.open .faq-q-text{color:var(--accent)}
+.faq-icon{width:24px;height:24px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;font-size:14px;color:var(--muted)}
+.faq-item.open .faq-icon{border-color:rgba(200,168,75,.3);color:var(--accent);transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s ease}
+.faq-item.open .faq-a{max-height:400px}
+.faq-a-inner{padding:0 24px 22px;font-size:14px;font-weight:300;color:var(--light-muted);line-height:1.8;border-top:1px solid rgba(255,255,255,.05)}
+.faq-a-inner a{color:var(--accent);text-decoration:none;transition:opacity .2s}.faq-a-inner a:hover{opacity:.8}
+.faq-a-inner strong{color:var(--off-white);font-weight:400}
+
+/* ── STILL NEED HELP ── */
+.help-banner{padding:64px 48px;background:var(--off-black);border-top:1px solid rgba(200,168,75,.08)}
+.help-inner{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.help-card{background:var(--carbon);padding:40px 36px;border:1px solid transparent;transition:border-color .2s;text-decoration:none;display:block}
+.help-card:hover{border-color:rgba(200,168,75,.2)}
+.help-card-icon{font-size:32px;margin-bottom:16px;display:block}
+.help-card-title{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--off-white);margin-bottom:8px}
+.help-card-body{font-size:13px;font-weight:300;color:var(--muted);line-height:1.7;margin-bottom:20px}
+.help-card-cta{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:8px;transition:gap .2s}
+.help-card:hover .help-card-cta{gap:14px}
+
+/* ── FOOTER ── */
+footer{background:var(--off-black);border-top:1px solid rgba(200,168,75,.15);padding:56px 48px 32px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.12em;color:var(--off-white);margin-bottom:16px}.footer-logo span{color:var(--accent)}
+.footer-tagline{font-size:13px;font-weight:300;color:var(--muted);line-height:1.7;max-width:220px;margin-bottom:24px}
+.footer-social{display:flex;gap:12px}
+.social-link{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}.social-link:hover{color:var(--accent)}
+.footer-col-title{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a{font-size:13px;font-weight:300;color:var(--muted);text-decoration:none;transition:color .2s}.footer-links a:hover{color:var(--off-white)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:1px solid rgba(255,255,255,.05)}
+.footer-copy{font-size:12px;font-weight:300;color:rgba(136,136,136,.6)}
+.footer-bottom-links{display:flex;gap:24px;list-style:none}
+.footer-bottom-links a{font-size:12px;font-weight:300;color:rgba(136,136,136,.6);text-decoration:none;transition:color .2s}.footer-bottom-links a:hover{color:var(--muted)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="adapt-perform-homepage.html" class="nav-logo">ADAPT <span>PERFORMANCE</span></a>
+  <ul class="nav-links">
+    <li><a href="adapt-all-chassis.html">Chassis</a></li>
+    <li><a href="adapt-service-kits.html">Maintenance</a></li>
+    <li><a href="adapt-fluids.html">Accessories</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="adapt-about.html">About</a></li>
+  </ul>
+  <a href="adapt-all-chassis.html" class="nav-cta">Find My Kit</a>
+</nav>
+
+<div class="breadcrumb">
+  <a href="adapt-perform-homepage.html">Home</a>
+  <span class="sep">›</span>
+  <span>FAQs</span>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div>
+      <p class="eyebrow">Support</p>
+      <h1 class="page-title">FREQUENTLY<br>ASKED<br><em>QUESTIONS.</em></h1>
+      <p class="page-sub">Answers to the most common questions about our kits, products, orders, and shipping. Can't find what you need? Reach out directly.</p>
+      <div class="hero-search">
+        <input type="text" placeholder="Search FAQs…" id="faq-search" oninput="searchFAQs(this.value)">
+        <button>Search</button>
+      </div>
+    </div>
+    <div class="hero-cats">
+      <a href="#kits" class="cat-link">
+        <div class="cat-link-left"><div class="cat-link-icon">📦</div><div class="cat-link-name">Kits &amp; Products</div></div>
+        <div style="display:flex;align-items:center;gap:14px"><div class="cat-link-count">4 Questions</div><div class="cat-link-arrow">→</div></div>
+      </a>
+      <a href="#orders" class="cat-link">
+        <div class="cat-link-left"><div class="cat-link-icon">🛒</div><div class="cat-link-name">Orders &amp; Shipping</div></div>
+        <div style="display:flex;align-items:center;gap:14px"><div class="cat-link-count">3 Questions</div><div class="cat-link-arrow">→</div></div>
+      </a>
+      <a href="#returns" class="cat-link">
+        <div class="cat-link-left"><div class="cat-link-icon">↩️</div><div class="cat-link-name">Returns &amp; Warranty</div></div>
+        <div style="display:flex;align-items:center;gap:14px"><div class="cat-link-count">2 Questions</div><div class="cat-link-arrow">→</div></div>
+      </a>
+      <a href="#install" class="cat-link">
+        <div class="cat-link-left"><div class="cat-link-icon">🔧</div><div class="cat-link-name">Installation &amp; Use</div></div>
+        <div style="display:flex;align-items:center;gap:14px"><div class="cat-link-count">2 Questions</div><div class="cat-link-arrow">→</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ BODY -->
+<div class="faq-layout">
+  <aside class="faq-sidebar">
+    <div class="sidebar-label">Categories</div>
+    <a href="#kits" class="sidebar-link active" id="nav-kits">Kits &amp; Products</a>
+    <a href="#orders" class="sidebar-link" id="nav-orders">Orders &amp; Shipping</a>
+    <a href="#returns" class="sidebar-link" id="nav-returns">Returns &amp; Warranty</a>
+    <a href="#install" class="sidebar-link" id="nav-install">Installation &amp; Use</a>
+  </aside>
+
+  <div class="faq-content">
+
+    <!-- KITS & PRODUCTS -->
+    <div class="faq-group" id="kits">
+      <div class="faq-group-title">KITS &amp; <em>PRODUCTS</em></div>
+      <div class="faq-group-sub">What's in the kits, how to choose, and what makes them different.</div>
+      <div class="faq-list">
+
+        <div class="faq-item open">
+          <div class="faq-q" onclick="toggle(this)">
+            <div class="faq-q-text">What is included in your maintenance kits?</div>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              Our maintenance kits are designed to provide everything you need to complete a full service interval for your specific chassis. Each kit typically includes:<br><br>
+              <strong>Premium fluid</strong> — matched to your engine's viscosity and capacity requirements<br>
+              <strong>OEM-quality oil filter</strong> — correctly threaded for your engine<br>
+              <strong>Crush washer / drain plug hardware</strong> — so you're not hunting for one separately<br><br>
+              Every kit is chassis-specific and tier-matched. The kit contents, fill volume, and product specs are listed on every product page so you know exactly what you're getting before checkout.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">
+            <div class="faq-q-text">How do I know which maintenance kit to purchase?</div>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              Start with your chassis — browse the <a href="adapt-all-chassis.html">All Chassis</a> page and select your vehicle. Every chassis page breaks down the available kits by tier (ECO / OEM+  / Track) with full spec details for your engine.<br><br>
+              If you're unsure which tier fits your build, here's the quick guide:<br><br>
+              <strong>Tier 01 — ECO / OEM:</strong> Daily driver, stock engine, standard service interval<br>
+              <strong>Tier 02 — OEM+ / Street:</strong> Lightly modified, street performance, enthusiast daily<br>
+              <strong>Tier 03 — Track / Purpose Built:</strong> Boosted, high-rpm, regular track use, or time attack<br><br>
+              Still not sure? <a href="adapt-contact.html">Contact us</a> — we'll point you in the right direction.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">
+            <div class="faq-q-text">Do you offer custom maintenance kits?</div>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              At the moment, we offer pre-packaged kits designed for specific platforms and engine types. Our catalog is built to cover the most common configurations for each chassis we support.<br><br>
+              If you have a unique request — a swap, a non-standard configuration, or a chassis we don't currently list — feel free to <a href="adapt-contact.html">reach out</a>. We're happy to discuss options and are actively expanding the catalog based on community requests.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">
+            <div class="faq-q-text">My chassis isn't listed. Are you adding more?</div>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              Yes — the catalog is actively expanding. We're adding new chassis, fluid categories, and service kit types regularly. Service Kits+ (full-vehicle fluid packages) and engine-specific service kits are in development.<br><br>
+              If your platform isn't listed yet, <a href="adapt-contact.html">let us know</a> — platform requests from the community directly influence what we build next.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ORDERS & SHIPPING -->
+    <div class="faq-group" id="orders">
+      <div class="faq-group-title">ORDERS &amp; <em>SHIPPING</em></div>
+      <div class="faq-group-sub">Processing times, tracking, and international shipping info.</div>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">
+            <div class="faq-q-text">How long will it take to receive my order?</div>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              Orders are processed within <strong>1–3 business days</strong> (excluding weekends and holidays) after your order confirmation email. You'll receive a second notification with your tracking number once your order has shipped.<br><br>
+              Standard shipping typically takes <strong>5–7 business days</strong> after processing. Actual delivery times may vary depending on your location and carrier.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">
+            <div class="faq-q-text">Do you ship internationally?</div>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              We currently ship within the <strong>United States only</strong>. International shipping is not available at this time.<br><br>
+              We're aware there's demand internationally and are evaluating options for the future. Stay tuned — sign up for updates on our homepage to be notified when that changes.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">
+            <div class="faq-q-text">Can I change or cancel my order after placing it?</div>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              Orders are processed quickly to ensure fast delivery. If you need to change or cancel your order, <strong>contact us immediately</strong> at <a href="mailto:adaptandperform@gmail.com">adaptandperform@gmail.com</a>.<br><br>
+              If your order has already shipped, you will need to follow our <a href="#">return policy</a> to initiate a refund or exchange. We'll do our best to accommodate changes before fulfillment.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RETURNS & WARRANTY -->
+    <div class="faq-group" id="returns">
+      <div class="faq-group-title">RETURNS &amp; <em>WARRANTY</em></div>
+      <div class="faq-group-sub">Our return window, conditions, and how product warranties work.</div>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">
+            <div class="faq-q-text">What is your return policy?</div>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              We offer a <strong>30-day return window</strong> for most items from the date of delivery. To be eligible for a return:<br><br>
+              — Items must be <strong>unused and uninstalled</strong><br>
+              — Items must be in their <strong>original packaging</strong><br>
+              — The customer is responsible for return shipping costs<br>
+              — A restocking fee may apply<br><br>
+              For full details, refer to our <a href="#">Shipping &amp; Returns Policy</a>. To initiate a return, <a href="adapt-contact.html">contact us</a> with your order number.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">
+            <div class="faq-q-text">Are your products covered by a warranty?</div>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              Our kits contain components from various manufacturers. Any product warranties are <strong>handled directly by the manufacturer</strong>, not Adapt Performance Solutions. We do not offer independent warranties on the parts within our kits.<br><br>
+              That said, every part we include is OEM-quality and vetted for compatibility with the platforms listed. We stand behind the spec work. For full details, see our <a href="#">Warranty &amp; Liability Disclaimer</a>.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- INSTALLATION & USE -->
+    <div class="faq-group" id="install">
+      <div class="faq-group-title">INSTALL &amp; <em>USE</em></div>
+      <div class="faq-group-sub">Installation guidance and getting the most out of your kit.</div>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">
+            <div class="faq-q-text">Do I need a professional mechanic to install these kits?</div>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              Our kits are designed to be comprehensive and DIY-friendly for anyone with basic mechanical knowledge. However, we <strong>strongly recommend professional installation</strong> if you're not confident performing the service yourself — particularly for drain plug torque specs, filter seating, and fill volumes.<br><br>
+              Improper installation can cause mechanical failure, void manufacturer warranties, or create unsafe driving conditions. When in doubt, have a qualified technician perform the service using your Adapt kit.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">
+            <div class="faq-q-text">Where can I find more information about a specific product?</div>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              Every product and chassis page includes detailed spec information — fill volumes, viscosity grades, filter part numbers, and torque specs where applicable. Start with your <a href="adapt-all-chassis.html">chassis page</a> for the most relevant information for your platform.<br><br>
+              You can also browse our <a href="adapt-fluids.html">Fluids</a> catalog for standalone product specs and application notes. If you have a specific question that isn't covered, <a href="adapt-contact.html">reach out to us directly</a> — we're happy to help.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- STILL NEED HELP -->
+<section class="help-banner">
+  <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:10px"><span style="display:block;width:20px;height:1px;background:var(--accent)"></span>Still Have Questions?</p>
+  <h2 style="font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:.03em;color:var(--off-white);line-height:1;margin-bottom:40px">WE'RE HERE TO <span style="color:var(--accent)">HELP.</span></h2>
+  <div class="help-inner">
+    <a href="adapt-contact.html" class="help-card">
+      <span class="help-card-icon">✉️</span>
+      <div class="help-card-title">Send Us a Message</div>
+      <p class="help-card-body">Use our contact form or email us directly at adaptandperform@gmail.com. We respond to all inquiries personally — no automated ticketing system.</p>
+      <div class="help-card-cta">Contact Us →</div>
+    </a>
+    <a href="adapt-all-chassis.html" class="help-card">
+      <span class="help-card-icon">🔍</span>
+      <div class="help-card-title">Find Your Kit</div>
+      <p class="help-card-body">Browse by chassis to see all available kits and specs for your specific platform. Every product page lists full contents, fill volumes, and tier details.</p>
+      <div class="help-card-cta">Browse Chassis →</div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">ADAPT <span>PERFORMANCE</span></div>
+      <p class="footer-tagline">Chassis-specific maintenance kits and performance fluids for street and track builds.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/adaptperformance/" class="social-link">Instagram</a>
+        <a href="https://www.facebook.com/adaptandperform" class="social-link">Facebook</a>
+        <a href="#" class="social-link">YouTube</a>
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Shop</p>
+      <ul class="footer-links">
+        <li><a href="adapt-all-chassis.html">All Chassis</a></li>
+        <li><a href="adapt-service-kits.html">Service Kits</a></li>
+        <li><a href="adapt-fluids.html">Fluids</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Support</p>
+      <ul class="footer-links">
+        <li><a href="#">FAQs</a></li>
+        <li><a href="adapt-contact.html">Contact Us</a></li>
+        <li><a href="#">Shipping &amp; Returns</a></li>
+        <li><a href="#">Warranty &amp; Liability</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Company</p>
+      <ul class="footer-links">
+        <li><a href="adapt-about.html">About Us</a></li>
+        <li><a href="equipt-homepage.html">Equipt Division</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Adapt Performance Solutions LLC. All rights reserved.</p>
+    <ul class="footer-bottom-links"><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="adapt-contact.html">Contact</a></li></ul>
+  </div>
+</footer>
+
+<script>
+function toggle(el) {
+  const item = el.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// sidebar highlight on scroll
+const groups = ['kits','orders','returns','install'];
+window.addEventListener('scroll', () => {
+  let cur = groups[0];
+  groups.forEach(id => { const el = document.getElementById(id); if(el && window.scrollY >= el.offsetTop - 120) cur = id; });
+  document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+  const a = document.getElementById('nav-' + cur);
+  if(a) a.classList.add('active');
+});
+
+// search
+function searchFAQs(q) {
+  const term = q.toLowerCase().trim();
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const text = item.querySelector('.faq-q-text').textContent.toLowerCase();
+    const answer = item.querySelector('.faq-a-inner').textContent.toLowerCase();
+    item.style.display = (!term || text.includes(term) || answer.includes(term)) ? 'block' : 'none';
+  });
+}
+</script>
+</body>
+</html>

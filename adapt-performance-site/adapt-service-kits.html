@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Service Kits | Adapt Performance Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--black:#0a0a0a;--off-black:#111;--carbon:#1a1a1a;--mid:#2e2e2e;--muted:#888;--light-muted:#aaa;--off-white:#f0ede6;--accent:#c8a84b;--accent-bright:#e8c96a}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--off-white);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;background:rgba(10,10,10,.94);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,168,75,.15)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.12em;color:var(--off-white);text-decoration:none}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--light-muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+.nav-cta{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--black);background:var(--accent);padding:9px 22px;text-decoration:none;transition:background .2s}
+.nav-cta:hover{background:var(--accent-bright)}
+
+.breadcrumb{margin-top:64px;padding:16px 48px;background:var(--off-black);border-bottom:1px solid rgba(200,168,75,.08);display:flex;align-items:center;gap:10px}
+.breadcrumb a,.breadcrumb span{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.breadcrumb a:hover{color:var(--accent)}
+.breadcrumb .sep{color:rgba(200,168,75,.3)}
+.breadcrumb span:last-child{color:var(--accent)}
+
+.page-hero{background:var(--off-black);padding:72px 48px 64px;position:relative;overflow:hidden;border-bottom:1px solid rgba(200,168,75,.1)}
+.page-hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-15deg,transparent 0,transparent 48px,rgba(200,168,75,.025) 48px,rgba(200,168,75,.025) 49px);pointer-events:none}
+.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--accent)}
+.page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,7vw,92px);line-height:.9;letter-spacing:.02em;color:var(--off-white);margin-bottom:20px}
+.page-title em{font-style:normal;color:var(--accent)}
+.page-sub{font-size:15px;font-weight:300;color:var(--light-muted);line-height:1.7;margin-bottom:32px}
+.btn-primary{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--black);background:var(--accent);padding:13px 32px;text-decoration:none;display:inline-block;transition:background .2s}
+.btn-primary:hover{background:var(--accent-bright)}
+.btn-ghost-link{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--off-white);text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:color .2s;margin-left:20px}
+.btn-ghost-link:hover{color:var(--accent)}
+
+/* TIER EXPLAINER */
+.tier-explainer{padding:72px 48px;background:var(--black)}
+.section-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:40px;display:flex;align-items:center;gap:12px}
+.section-label::before{content:'';display:block;width:24px;height:1px;background:var(--accent)}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:.03em;color:var(--off-white);line-height:1;margin-bottom:48px}
+.section-title em{font-style:normal;color:var(--accent)}
+.tiers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.tier-card{background:var(--carbon);padding:40px 32px;border:1px solid transparent;transition:border-color .25s;position:relative;overflow:hidden}
+.tier-card:hover{border-color:rgba(200,168,75,.2)}
+.tier-card.featured{background:var(--mid);border-color:rgba(200,168,75,.3)}
+.tier-card.featured::before{content:'MOST POPULAR';position:absolute;top:20px;right:-28px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:600;letter-spacing:.14em;color:var(--black);background:var(--accent);padding:4px 40px;transform:rotate(45deg)}
+.tier-badge{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);background:rgba(200,168,75,.1);padding:4px 12px;display:inline-block;margin-bottom:16px}
+.tier-name{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:.04em;color:var(--off-white);margin-bottom:8px}
+.tier-tagline{font-size:13px;font-weight:300;color:var(--muted);margin-bottom:24px;line-height:1.5}
+.tier-features{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:28px}
+.tier-features li{font-size:13px;font-weight:300;color:var(--light-muted);display:flex;align-items:flex-start;gap:10px}
+.tier-features li::before{content:'—';color:var(--accent);flex-shrink:0}
+.tier-price-note{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.1em;color:var(--muted);border-top:1px solid rgba(255,255,255,.06);padding-top:20px;margin-top:4px}
+
+/* ALL KITS GRID */
+.kits-section{padding:72px 48px;background:var(--off-black)}
+.filter-row{display:flex;gap:8px;margin-bottom:36px;flex-wrap:wrap}
+.filter-chip{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:1px solid rgba(255,255,255,.1);padding:8px 18px;cursor:pointer;transition:all .2s}
+.filter-chip:hover,.filter-chip.active{color:var(--black);background:var(--accent);border-color:var(--accent)}
+.kits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.kit-card{background:var(--carbon);border:1px solid transparent;transition:border-color .25s;overflow:hidden}
+.kit-card:hover{border-color:rgba(200,168,75,.2)}
+.kit-header{padding:24px 24px 18px;border-bottom:1px solid rgba(255,255,255,.05)}
+.kit-make-tag{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.kit-name{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:600;letter-spacing:.04em;color:var(--off-white);margin-bottom:4px;line-height:1.25}
+.kit-tier-label{font-size:11px;font-weight:300;color:var(--muted)}
+.kit-body{padding:18px 24px 22px}
+.kit-includes{font-size:12px;font-weight:300;color:var(--muted);line-height:1.6;margin-bottom:16px}
+.kit-price-row{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid rgba(255,255,255,.05)}
+.kit-price{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:.04em;color:var(--off-white)}
+.kit-price span{font-family:'Barlow',sans-serif;font-size:13px;font-weight:300;color:var(--muted);margin-left:2px}
+.btn-add{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--black);background:var(--accent);border:none;padding:10px 20px;cursor:pointer;transition:background .2s;text-decoration:none;display:inline-block}
+.btn-add:hover{background:var(--accent-bright)}
+
+/* COMING SOON */
+.coming-soon-section{padding:72px 48px;background:var(--black)}
+.coming-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.coming-card{background:var(--carbon);padding:40px 32px;border:1px solid rgba(200,168,75,.15)}
+.coming-tag{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--accent);opacity:.6;animation:pulse 2s ease-in-out infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.15)}}
+.coming-name{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:.04em;color:var(--off-white);margin-bottom:10px}
+.coming-desc{font-size:13px;font-weight:300;color:var(--muted);line-height:1.7;margin-bottom:24px}
+.btn-notify{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);background:transparent;border:1px solid rgba(200,168,75,.3);padding:10px 22px;cursor:pointer;transition:all .2s;display:inline-block}
+.btn-notify:hover{background:rgba(200,168,75,.1);border-color:var(--accent)}
+
+footer{background:var(--off-black);border-top:1px solid rgba(200,168,75,.15);padding:56px 48px 32px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.12em;color:var(--off-white);margin-bottom:16px}
+.footer-logo span{color:var(--accent)}
+.footer-tagline{font-size:13px;font-weight:300;color:var(--muted);line-height:1.7;max-width:220px;margin-bottom:24px}
+.footer-social{display:flex;gap:12px}
+.social-link{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.social-link:hover{color:var(--accent)}
+.footer-col-title{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a{font-size:13px;font-weight:300;color:var(--muted);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--off-white)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:1px solid rgba(255,255,255,.05)}
+.footer-copy{font-size:12px;font-weight:300;color:rgba(136,136,136,.6)}
+.footer-bottom-links{display:flex;gap:24px;list-style:none}
+.footer-bottom-links a{font-size:12px;font-weight:300;color:rgba(136,136,136,.6);text-decoration:none;transition:color .2s}
+.footer-bottom-links a:hover{color:var(--muted)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="adapt-perform-homepage.html" class="nav-logo">ADAPT <span>PERFORMANCE</span></a>
+  <ul class="nav-links">
+    <li><a href="adapt-all-chassis.html">Chassis</a></li>
+    <li><a href="#" class="active">Maintenance</a></li>
+    <li><a href="adapt-fluids.html">Accessories</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="adapt-about.html">About</a></li>
+  </ul>
+  <a href="adapt-all-chassis.html" class="nav-cta">Find My Kit</a>
+</nav>
+
+<div class="breadcrumb">
+  <a href="adapt-perform-homepage.html">Home</a>
+  <span class="sep">›</span>
+  <a href="#">Maintenance</a>
+  <span class="sep">›</span>
+  <span>Service Kits</span>
+</div>
+
+<section class="page-hero">
+  <div class="hero-inner">
+    <div>
+      <p class="eyebrow">Maintenance</p>
+      <h1 class="page-title">SERVICE<br><em>KITS.</em></h1>
+      <p class="page-sub">Every kit is chassis-specific and tier-matched — oil, filter, hardware, and capacity spec'd for your platform. No guessing, no mismatched parts, no generic assembly.</p>
+      <div>
+        <a href="#kits" class="btn-primary">Browse All Kits</a>
+        <a href="adapt-all-chassis.html" class="btn-ghost-link">Shop by Chassis →</a>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px">
+      <div style="background:var(--carbon);padding:28px 22px;border:1px solid rgba(200,168,75,.15)">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:rgba(200,168,75,.25);line-height:1;margin-bottom:10px">30+</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--off-white);margin-bottom:4px">Chassis Supported</div>
+        <div style="font-size:12px;font-weight:300;color:var(--muted)">Toyota, Lexus, Honda, Subaru, BMW</div>
+      </div>
+      <div style="background:var(--carbon);padding:28px 22px;border:1px solid rgba(200,168,75,.15)">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:rgba(200,168,75,.25);line-height:1;margin-bottom:10px">3</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--off-white);margin-bottom:4px">Service Tiers</div>
+        <div style="font-size:12px;font-weight:300;color:var(--muted)">ECO / OEM+ / Track</div>
+      </div>
+      <div style="background:var(--carbon);padding:28px 22px;border:1px solid rgba(200,168,75,.15)">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:rgba(200,168,75,.25);line-height:1;margin-bottom:10px">100+</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--off-white);margin-bottom:4px">Brands Carried</div>
+        <div style="font-size:12px;font-weight:300;color:var(--muted)">Motul, HKS, Nismo, ARP &amp; more</div>
+      </div>
+      <div style="background:var(--carbon);padding:28px 22px;border:1px solid rgba(200,168,75,.15)">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:rgba(200,168,75,.25);line-height:1;margin-bottom:10px">1-3</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--off-white);margin-bottom:4px">Day Processing</div>
+        <div style="font-size:12px;font-weight:300;color:var(--muted)">Orders ship within 1–3 business days</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIER EXPLAINER -->
+<section class="tier-explainer">
+  <p class="section-label">Understanding the Tiers</p>
+  <h2 class="section-title">THREE TIERS.<br><em>ONE STANDARD.</em></h2>
+  <div class="tiers-grid">
+    <div class="tier-card">
+      <div class="tier-badge">Tier 01</div>
+      <div class="tier-name">ECO / OEM</div>
+      <p class="tier-tagline">OEM-equivalent spec. Full reliability, sensible spend for daily drivers and stock builds.</p>
+      <ul class="tier-features">
+        <li>Motul ECO-lite or OEM-grade oil</li>
+        <li>OEM or OEM-spec filter</li>
+        <li>Crush washer / drain hardware</li>
+        <li>Chassis-matched fill volume</li>
+        <li>Daily driver and stock build focused</li>
+      </ul>
+      <div class="tier-price-note">Starting from $89.98</div>
+    </div>
+    <div class="tier-card featured">
+      <div class="tier-badge">Tier 02</div>
+      <div class="tier-name">OEM+ / Street</div>
+      <p class="tier-tagline">Full synthetic with a premium filter. The enthusiast baseline — built for OEM+ and lightly modded street cars.</p>
+      <ul class="tier-features">
+        <li>Motul 8100 full synthetic</li>
+        <li>HKS, NISMO, or OEM-spec filter</li>
+        <li>Copper or aluminum crush washer</li>
+        <li>Chassis-matched fill volume</li>
+        <li>For OEM+ and lightly modified builds</li>
+      </ul>
+      <div class="tier-price-note">Starting from $119.98</div>
+    </div>
+    <div class="tier-card">
+      <div class="tier-badge">Tier 03</div>
+      <div class="tier-name">Track / Purpose Built</div>
+      <p class="tier-tagline">Race-grade protection for boosted, high-rpm, or track-day builds that demand more from every service interval.</p>
+      <ul class="tier-features">
+        <li>Motul 300V Competition or Racing</li>
+        <li>High-flow filter: HKS, Nismo</li>
+        <li>ARP hardware option available</li>
+        <li>Spec'd for turbo and high-compression</li>
+        <li>For track, time attack, and drag builds</li>
+      </ul>
+      <div class="tier-price-note">Starting from $189.98</div>
+    </div>
+  </div>
+</section>
+
+<!-- ALL KITS -->
+<section class="kits-section" id="kits">
+  <p class="section-label">All Service Kits</p>
+  <div class="filter-row">
+    <div class="filter-chip active">All</div>
+    <div class="filter-chip">ECO / OEM</div>
+    <div class="filter-chip">Street Performance</div>
+    <div class="filter-chip">Track / Purpose Built</div>
+    <div class="filter-chip">Toyota</div>
+    <div class="filter-chip">Lexus</div>
+    <div class="filter-chip">Honda</div>
+    <div class="filter-chip">Subaru</div>
+    <div class="filter-chip">BMW</div>
+  </div>
+  <div class="kits-grid">
+
+    <div class="kit-card">
+      <div class="kit-header">
+        <div class="kit-make-tag">Toyota · GR86 / BRZ FA24</div>
+        <div class="kit-name">Street Performance Oil Change Kit</div>
+        <div class="kit-tier-label">Tier 02 · Motul 8100 · HKS Filter</div>
+      </div>
+      <div class="kit-body">
+        <div class="kit-includes">6.3 qt Motul 8100 5W-30 · HKS High-Flow Filter · Aluminum crush washer</div>
+        <div class="kit-price-row">
+          <div class="kit-price">$146<span>.98</span></div>
+          <a href="#" class="btn-add">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="kit-card">
+      <div class="kit-header">
+        <div class="kit-make-tag">Toyota · GR86 / BRZ FA24</div>
+        <div class="kit-name">Track / Purpose Built Oil Change Kit</div>
+        <div class="kit-tier-label">Tier 03 · Motul 300V · High-Flow Filter</div>
+      </div>
+      <div class="kit-body">
+        <div class="kit-includes">6.3 qt Motul 300V Competition · HKS High-Flow · ARP drain hardware</div>
+        <div class="kit-price-row">
+          <div class="kit-price">$225<span>.98</span></div>
+          <a href="#" class="btn-add">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="kit-card">
+      <div class="kit-header">
+        <div class="kit-make-tag">Lexus · SC300 / SC400</div>
+        <div class="kit-name">ECO / OEM Oil Change Kit</div>
+        <div class="kit-tier-label">Tier 01 · OEM-Grade 5W-30</div>
+      </div>
+      <div class="kit-body">
+        <div class="kit-includes">5.49 qt (2JZ) / 4.97 qt (1UZ) · OEM-spec filter · Crush washer</div>
+        <div class="kit-price-row">
+          <div class="kit-price">$111<span>.98</span></div>
+          <a href="adapt-chassis-sc300-sc400.html" class="btn-add">View Kit</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="kit-card">
+      <div class="kit-header">
+        <div class="kit-make-tag">Lexus · SC300 / SC400</div>
+        <div class="kit-name">OEM+ / Street Oil Change Kit</div>
+        <div class="kit-tier-label">Tier 02 · Motul 8100 Full Synthetic</div>
+      </div>
+      <div class="kit-body">
+        <div class="kit-includes">Motul 8100 5W-30 · HKS Filter · Copper crush washer</div>
+        <div class="kit-price-row">
+          <div class="kit-price">$128<span>.98</span></div>
+          <a href="adapt-chassis-sc300-sc400.html" class="btn-add">View Kit</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="kit-card">
+      <div class="kit-header">
+        <div class="kit-make-tag">Lexus · SC300 / SC400</div>
+        <div class="kit-name">Track / Purpose Built Oil Change Kit</div>
+        <div class="kit-tier-label">Tier 03 · Motul 300V Competition</div>
+      </div>
+      <div class="kit-body">
+        <div class="kit-includes">Motul 300V Competition · High-Flow Filter · ARP hardware</div>
+        <div class="kit-price-row">
+          <div class="kit-price">$223<span>.98</span></div>
+          <a href="adapt-chassis-sc300-sc400.html" class="btn-add">View Kit</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="kit-card">
+      <div class="kit-header">
+        <div class="kit-make-tag">Lexus · IS300</div>
+        <div class="kit-name">Street Performance Oil Change Kit</div>
+        <div class="kit-tier-label">Tier 02 · 2JZ-GE · Motul 8100</div>
+      </div>
+      <div class="kit-body">
+        <div class="kit-includes">Motul 8100 5W-30 · HKS filter · Drain hardware</div>
+        <div class="kit-price-row">
+          <div class="kit-price">$202<span>.98</span></div>
+          <a href="#" class="btn-add">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="kit-card">
+      <div class="kit-header">
+        <div class="kit-make-tag">Honda · S2000</div>
+        <div class="kit-name">Street Performance Oil Change Kit</div>
+        <div class="kit-tier-label">Tier 02 · F20C/F22C · High-Rev Spec</div>
+      </div>
+      <div class="kit-body">
+        <div class="kit-includes">Motul 8100 10W-40 · OEM-spec filter · Crush washer</div>
+        <div class="kit-price-row">
+          <div class="kit-price">$147<span>.98</span></div>
+          <a href="#" class="btn-add">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="kit-card">
+      <div class="kit-header">
+        <div class="kit-make-tag">Subaru · WRX STi</div>
+        <div class="kit-name">Track / Purpose Built Oil Change Kit</div>
+        <div class="kit-tier-label">Tier 03 · EJ257 · Motul 300V</div>
+      </div>
+      <div class="kit-body">
+        <div class="kit-includes">Motul 300V 5W-40 · High-flow filter · ARP hardware</div>
+        <div class="kit-price-row">
+          <div class="kit-price">$218<span>.98</span></div>
+          <a href="#" class="btn-add">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="kit-card">
+      <div class="kit-header">
+        <div class="kit-make-tag">BMW · Z4 G29</div>
+        <div class="kit-name">OEM+ / Street Oil Change Kit</div>
+        <div class="kit-tier-label">Tier 02 · B58 · Motul 8100</div>
+      </div>
+      <div class="kit-body">
+        <div class="kit-includes">Motul 8100 0W-40 · OEM-spec filter · BMW drain plug</div>
+        <div class="kit-price-row">
+          <div class="kit-price">$134<span>.98</span></div>
+          <a href="#" class="btn-add">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMING SOON -->
+<section class="coming-soon-section">
+  <p class="section-label">Coming Soon</p>
+  <h2 style="font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:.03em;color:var(--off-white);line-height:1;margin-bottom:40px">EXPANDING THE<br><span style="color:var(--accent)">CATALOG.</span></h2>
+  <div class="coming-grid">
+    <div class="coming-card">
+      <div class="coming-tag"><span class="pulse"></span>Coming Soon</div>
+      <div class="coming-name">Service Kits+</div>
+      <p class="coming-desc">The next tier — expanded kits that go beyond oil changes. Engine, transmission, differential, and brake service bundled into a single order for your chassis.</p>
+      <button class="btn-notify">Notify Me When Live</button>
+    </div>
+    <div class="coming-card">
+      <div class="coming-tag"><span class="pulse"></span>Coming Soon</div>
+      <div class="coming-name">Engine Specific Kits</div>
+      <p class="coming-desc">Deep-dive engine service packages — head gaskets, timing components, seals, and consumables for major engine work spec'd to your build level.</p>
+      <button class="btn-notify">Notify Me When Live</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">ADAPT <span>PERFORMANCE</span></div>
+      <p class="footer-tagline">Chassis-specific maintenance kits and performance fluids for street and track builds.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/adaptperformance/" class="social-link">Instagram</a>
+        <a href="https://www.facebook.com/adaptandperform" class="social-link">Facebook</a>
+        <a href="#" class="social-link">YouTube</a>
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Kits</p>
+      <ul class="footer-links">
+        <li><a href="#">ECO / OEM</a></li>
+        <li><a href="#">Street Performance</a></li>
+        <li><a href="#">Track / Purpose Built</a></li>
+        <li><a href="#">Service Kits+ (Soon)</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Chassis</p>
+      <ul class="footer-links">
+        <li><a href="adapt-all-chassis.html">All Chassis</a></li>
+        <li><a href="#">Toyota</a></li>
+        <li><a href="#">Lexus</a></li>
+        <li><a href="#">Honda</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Support</p>
+      <ul class="footer-links">
+        <li><a href="#">Shipping &amp; Returns</a></li>
+        <li><a href="adapt-faqs.html">FAQs</a></li>
+        <li><a href="adapt-contact.html">Contact Us</a></li>
+        <li><a href="adapt-about.html">About Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Adapt Performance Solutions LLC. All rights reserved.</p>
+    <ul class="footer-bottom-links"><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="adapt-contact.html">Contact</a></li></ul>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.filter-chip').forEach(chip => {
+  chip.addEventListener('click', function() {
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

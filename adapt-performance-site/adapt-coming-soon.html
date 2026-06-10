@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Adapt Performance Solutions — Chassis-specific maintenance kits and performance fluids. Launching soon.">
+<title>Adapt Performance Solutions — Coming Soon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:         #0a0a0a;
+  --off-black:     #0f0f0f;
+  --carbon:        #161616;
+  --mid:           #242424;
+  --muted:         #666;
+  --light-muted:   #999;
+  --off-white:     #f0ede6;
+  --accent:        #c8a84b;
+  --accent-bright: #e8c96a;
+  --accent-dim:    rgba(200,168,75,0.15);
+}
+
+html, body { height: 100%; }
+
+body {
+  background: var(--black);
+  color: var(--off-white);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ── BACKGROUND TEXTURE ── */
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Grid lines */
+.bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg,   transparent 0, transparent 79px, rgba(200,168,75,0.03) 79px, rgba(200,168,75,0.03) 80px),
+    repeating-linear-gradient(90deg,  transparent 0, transparent 79px, rgba(200,168,75,0.03) 79px, rgba(200,168,75,0.03) 80px);
+}
+
+/* Diagonal speed lines */
+.bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -18deg,
+    transparent 0, transparent 60px,
+    rgba(200,168,75,0.018) 60px, rgba(200,168,75,0.018) 61px
+  );
+}
+
+/* Radial glow centre-left */
+.bg-glow {
+  position: absolute;
+  top: 30%;
+  left: -10%;
+  width: 900px;
+  height: 900px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(200,168,75,0.055) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* ── LAYOUT ── */
+.page {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  padding: 28px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(200,168,75,0.1);
+  animation: fadeDown 0.8s ease both;
+}
+
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.12em;
+  color: var(--off-white);
+}
+.logo span { color: var(--accent); }
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.topbar-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+.topbar-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.topbar-links a:hover { color: var(--accent); }
+
+/* ── MAIN CONTENT ── */
+.main {
+  display: grid;
+  grid-template-columns: 1fr 480px;
+  gap: 0;
+  padding: 0 48px;
+  align-items: center;
+  min-height: calc(100vh - 140px);
+}
+
+/* LEFT COLUMN */
+.left {
+  padding: 60px 80px 60px 0;
+  border-right: 1px solid rgba(200,168,75,0.08);
+}
+
+.eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(80px, 10vw, 136px);
+  line-height: 0.88;
+  letter-spacing: 0.015em;
+  color: var(--off-white);
+  margin-bottom: 36px;
+  animation: fadeUp 0.7s 0.2s ease both;
+}
+.headline em {
+  font-style: normal;
+  color: var(--accent);
+  display: block;
+}
+.headline .line-muted {
+  color: rgba(240,237,230,0.18);
+}
+
+.sub {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--light-muted);
+  max-width: 480px;
+  margin-bottom: 48px;
+  animation: fadeUp 0.7s 0.3s ease both;
+}
+.sub strong {
+  color: var(--off-white);
+  font-weight: 400;
+}
+
+/* NOTIFY FORM */
+.notify-form {
+  margin-bottom: 48px;
+  animation: fadeUp 0.7s 0.4s ease both;
+}
+
+.notify-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.notify-input-row {
+  display: flex;
+  gap: 0;
+  max-width: 480px;
+}
+
+.notify-input {
+  flex: 1;
+  background: var(--carbon);
+  border: 1px solid rgba(200,168,75,0.2);
+  border-right: none;
+  padding: 14px 20px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--off-white);
+  outline: none;
+  transition: border-color 0.2s;
+  min-width: 0;
+}
+.notify-input::placeholder { color: var(--muted); }
+.notify-input:focus { border-color: rgba(200,168,75,0.5); }
+
+.notify-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--accent);
+  border: none;
+  padding: 14px 28px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.notify-btn:hover { background: var(--accent-bright); }
+
+.notify-success {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: rgba(200,168,75,0.08);
+  border: 1px solid rgba(200,168,75,0.25);
+  max-width: 480px;
+}
+.notify-success.show { display: flex; }
+.notify-success-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.notify-note {
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--muted);
+  margin-top: 10px;
+  max-width: 480px;
+}
+
+/* SOCIAL ROW */
+.social-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  animation: fadeUp 0.7s 0.5s ease both;
+}
+.social-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.social-link {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--light-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.social-link:hover { color: var(--accent); }
+
+/* ── RIGHT COLUMN ── */
+.right {
+  padding: 60px 0 60px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  animation: fadeUp 0.7s 0.3s ease both;
+}
+
+/* PREVIEW CARDS */
+.preview-card {
+  background: var(--carbon);
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 24px 22px;
+  transition: border-color 0.25s, background 0.25s;
+  cursor: default;
+}
+.preview-card:hover {
+  border-color: rgba(200,168,75,0.2);
+  background: var(--mid);
+}
+
+.preview-card__label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.preview-card__label::before {
+  content: '';
+  display: block;
+  width: 16px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.preview-card__title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.05em;
+  color: var(--off-white);
+  margin-bottom: 6px;
+  line-height: 1;
+}
+
+.preview-card__body {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* TIER STATUS CARD */
+.tier-status {
+  background: var(--carbon);
+  border: 1px solid rgba(200,168,75,0.15);
+  padding: 24px 22px;
+}
+
+.tier-status__title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tier-status__title::before {
+  content: ''; display: block; width: 16px; height: 1px; background: var(--accent);
+}
+
+.tier-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tier-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tier-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.tier-dot--eco    { background: rgba(200,168,75,0.5); }
+.tier-dot--street { background: var(--accent); }
+.tier-dot--track  { background: var(--accent-bright); }
+
+.tier-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--off-white);
+  flex: 1;
+}
+
+.tier-status-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+}
+.tier-status-tag--ready {
+  color: var(--accent);
+  background: rgba(200,168,75,0.1);
+  border: 1px solid rgba(200,168,75,0.2);
+}
+.tier-status-tag--soon {
+  color: var(--muted);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* MAKES STRIP */
+.makes-strip {
+  background: var(--carbon);
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 18px 22px;
+}
+.makes-strip__label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.makes-list {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.make-chip {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--light-muted);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 4px 12px;
+}
+
+/* ── BOTTOM BAR ── */
+.bottombar {
+  padding: 20px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(200,168,75,0.08);
+  animation: fadeUp 0.7s 0.6s ease both;
+}
+
+.bottombar-left {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(136,136,136,0.5);
+}
+
+.bottombar-equipt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.equipt-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.equipt-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  color: #1eb8a0;
+}
+.equipt-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(30,184,160,0.5);
+}
+
+.bottombar-contact {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.bottombar-contact:hover { color: var(--accent); }
+
+/* ── COUNTDOWN ── */
+.countdown-wrap {
+  margin-bottom: 40px;
+  animation: fadeUp 0.7s 0.35s ease both;
+}
+.countdown-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+  display: block;
+}
+.countdown {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+}
+.countdown-unit {
+  text-align: center;
+}
+.countdown-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 48px;
+  letter-spacing: 0.04em;
+  color: var(--off-white);
+  line-height: 1;
+  display: block;
+  min-width: 52px;
+  border-bottom: 1px solid rgba(200,168,75,0.2);
+  padding-bottom: 6px;
+}
+.countdown-unit-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 6px;
+  display: block;
+}
+.countdown-sep {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 40px;
+  color: rgba(200,168,75,0.2);
+  line-height: 1;
+  padding-bottom: 14px;
+}
+
+/* ── PROGRESS BAR ── */
+.progress-wrap {
+  margin-bottom: 40px;
+  max-width: 480px;
+  animation: fadeUp 0.7s 0.38s ease both;
+}
+.progress-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.progress-label span { color: var(--accent); }
+.progress-bar-bg {
+  height: 2px;
+  background: rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--accent-dim), var(--accent));
+  width: 0%;
+  transition: width 1.2s 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── MOBILE ── */
+@media (max-width: 900px) {
+  .topbar { padding: 20px 24px; }
+  .topbar-links { display: none; }
+  .main { grid-template-columns: 1fr; padding: 0 24px; }
+  .left { padding: 48px 0 32px; border-right: none; border-bottom: 1px solid rgba(200,168,75,0.08); }
+  .right { padding: 32px 0 48px; }
+  .headline { font-size: clamp(64px, 14vw, 96px); }
+  .countdown-num { font-size: 36px; min-width: 40px; }
+  .bottombar { padding: 16px 24px; flex-wrap: wrap; gap: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg">
+  <div class="bg-glow"></div>
+</div>
+
+<div class="page">
+
+  <!-- ── TOP BAR ── -->
+  <header class="topbar">
+    <div class="logo">ADAPT <span>PERFORMANCE</span></div>
+    <div class="topbar-right">
+      <ul class="topbar-links">
+        <li><a href="https://www.instagram.com/adaptperformance/" target="_blank">Instagram</a></li>
+        <li><a href="https://www.facebook.com/adaptandperform" target="_blank">Facebook</a></li>
+        <li><a href="mailto:adaptandperform@gmail.com">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ── MAIN ── -->
+  <main class="main">
+
+    <!-- LEFT -->
+    <div class="left">
+
+      <p class="eyebrow">Something Better Is Coming</p>
+
+      <h1 class="headline">
+        BUILT<br>TO <em>ADAPT.</em>
+        <span class="line-muted">BACK<br>SOON.</span>
+      </h1>
+
+      <p class="sub">
+        We're rebuilding <strong>Adapt Performance Solutions</strong> from the ground up — tighter specs, cleaner kits, and a catalog that's actually done right. Chassis-specific maintenance kits and performance fluids for street and track builds. Worth the wait.
+      </p>
+
+      <!-- PROGRESS -->
+      <div class="progress-wrap" id="progress-wrap">
+        <div class="progress-label">
+          <span>Site Rebuild Progress</span>
+          <span id="progress-pct">78%</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- COUNTDOWN -->
+      <div class="countdown-wrap">
+        <span class="countdown-label">Estimated Launch</span>
+        <div class="countdown">
+          <div class="countdown-unit">
+            <span class="countdown-num" id="cd-days">--</span>
+            <span class="countdown-unit-label">Days</span>
+          </div>
+          <span class="countdown-sep">:</span>
+          <div class="countdown-unit">
+            <span class="countdown-num" id="cd-hours">--</span>
+            <span class="countdown-unit-label">Hours</span>
+          </div>
+          <span class="countdown-sep">:</span>
+          <div class="countdown-unit">
+            <span class="countdown-num" id="cd-mins">--</span>
+            <span class="countdown-unit-label">Mins</span>
+          </div>
+          <span class="countdown-sep">:</span>
+          <div class="countdown-unit">
+            <span class="countdown-num" id="cd-secs">--</span>
+            <span class="countdown-unit-label">Secs</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- EMAIL CAPTURE -->
+      <div class="notify-form">
+        <span class="notify-label">Get notified when we launch</span>
+        <div class="notify-input-row" id="notify-row">
+          <input
+            type="email"
+            class="notify-input"
+            id="email-input"
+            placeholder="your@email.com"
+            autocomplete="email"
+          >
+          <button class="notify-btn" onclick="handleNotify()">Notify Me</button>
+        </div>
+        <div class="notify-success" id="notify-success">
+          <span style="color:var(--accent);font-size:16px">✓</span>
+          <span class="notify-success-text">You're on the list — we'll reach out when we're live.</span>
+        </div>
+        <p class="notify-note">No spam. One email when we launch. That's it.</p>
+      </div>
+
+      <!-- SOCIAL -->
+      <div class="social-row">
+        <span class="social-label">Follow the build</span>
+        <a href="https://www.instagram.com/adaptperformance/" target="_blank" class="social-link">
+          <span>Instagram</span>
+        </a>
+        <a href="https://www.facebook.com/adaptandperform" target="_blank" class="social-link">
+          <span>Facebook</span>
+        </a>
+        <a href="mailto:adaptandperform@gmail.com" class="social-link">
+          <span>Email Us</span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+
+      <!-- What's coming -->
+      <div class="preview-card">
+        <div class="preview-card__label">Chassis Coverage</div>
+        <div class="preview-card__title">30+ PLATFORMS SUPPORTED</div>
+        <div class="preview-card__body">Toyota · Lexus · Honda · Subaru · BMW — every kit spec'd to the engine, not just the make.</div>
+      </div>
+
+      <!-- Tier status -->
+      <div class="tier-status">
+        <div class="tier-status__title">Service Kit Tiers</div>
+        <div class="tier-rows">
+          <div class="tier-row">
+            <div class="tier-dot tier-dot--eco"></div>
+            <div class="tier-name">ECO / OEM</div>
+            <span class="tier-status-tag tier-status-tag--ready">Ready</span>
+          </div>
+          <div class="tier-row">
+            <div class="tier-dot tier-dot--street"></div>
+            <div class="tier-name">Street Performance</div>
+            <span class="tier-status-tag tier-status-tag--ready">Ready</span>
+          </div>
+          <div class="tier-row">
+            <div class="tier-dot tier-dot--track"></div>
+            <div class="tier-name">Track / Purpose Built</div>
+            <span class="tier-status-tag tier-status-tag--ready">Ready</span>
+          </div>
+          <div class="tier-row">
+            <div class="tier-dot" style="background:rgba(255,255,255,0.15)"></div>
+            <div class="tier-name">Service Kits+</div>
+            <span class="tier-status-tag tier-status-tag--soon">Coming Soon</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fluids -->
+      <div class="preview-card">
+        <div class="preview-card__label">Standalone Fluids</div>
+        <div class="preview-card__title">MOTUL · ELF · ADDITIVES</div>
+        <div class="preview-card__body">300V Racing · 8100 Full Synthetic · RBF 660 · Gear 300 · Multi ATF — the full fluid catalog.</div>
+      </div>
+
+      <!-- Makes -->
+      <div class="makes-strip">
+        <div class="makes-strip__label">Chassis Coming at Launch</div>
+        <div class="makes-list">
+          <span class="make-chip">Supra Mk3</span>
+          <span class="make-chip">Supra Mk4</span>
+          <span class="make-chip">GR86</span>
+          <span class="make-chip">GR Corolla</span>
+          <span class="make-chip">IS300</span>
+          <span class="make-chip">SC300/400</span>
+          <span class="make-chip">GS300/400</span>
+          <span class="make-chip">S2000</span>
+          <span class="make-chip">WRX STi</span>
+          <span class="make-chip">Z4 G29</span>
+          <span class="make-chip">Civic Type R</span>
+          <span class="make-chip">+ More</span>
+        </div>
+      </div>
+
+      <!-- Equipt teaser -->
+      <div class="preview-card" style="border-color:rgba(30,184,160,0.15);background:rgba(30,184,160,0.03)">
+        <div class="preview-card__label" style="color:#1eb8a0">Also Launching</div>
+        <div class="preview-card__title" style="color:#1eb8a0">EQUIPT DIVISION</div>
+        <div class="preview-card__body">Shop branding, stickers, decals, merch, and media for race shops, performance brands, and builders.</div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ── BOTTOM BAR ── -->
+  <footer class="bottombar">
+    <div class="bottombar-left">© 2025 Adapt Performance Solutions LLC · All rights reserved.</div>
+    <div class="bottombar-equipt">
+      <span class="equipt-label">Division</span>
+      <div>
+        <div class="equipt-name">EQUIPT</div>
+        <div class="equipt-sub">Branding &amp; Creative</div>
+      </div>
+    </div>
+    <a href="mailto:adaptandperform@gmail.com" class="bottombar-contact">adaptandperform@gmail.com</a>
+  </footer>
+
+</div>
+
+<script>
+// ── COUNTDOWN ──────────────────────────────────────────────
+// Set your target launch date here — change to your actual date
+const LAUNCH_DATE = new Date('2026-08-08T00:00:00');
+
+function updateCountdown() {
+  const now  = new Date();
+  const diff = LAUNCH_DATE - now;
+
+  if (diff <= 0) {
+    document.getElementById('cd-days').textContent  = '00';
+    document.getElementById('cd-hours').textContent = '00';
+    document.getElementById('cd-mins').textContent  = '00';
+    document.getElementById('cd-secs').textContent  = '00';
+    return;
+  }
+
+  const days  = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const mins  = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const secs  = Math.floor((diff % (1000 * 60)) / 1000);
+
+  document.getElementById('cd-days').textContent  = String(days).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+  document.getElementById('cd-mins').textContent  = String(mins).padStart(2,'0');
+  document.getElementById('cd-secs').textContent  = String(secs).padStart(2,'0');
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ── PROGRESS BAR ──────────────────────────────────────────
+window.addEventListener('load', () => {
+  const START_DATE = new Date('2025-10-01T00:00:00');
+  const END_DATE   = new Date('2026-08-08T00:00:00');
+  const now        = new Date();
+  const totalMs    = END_DATE - START_DATE;
+  const elapsedMs  = Math.min(Math.max(now - START_DATE, 0), totalMs);
+  const pct        = Math.round((elapsedMs / totalMs) * 100);
+  document.getElementById('progress-pct').textContent = pct + '%';
+  setTimeout(() => {
+    document.getElementById('progress-fill').style.width = pct + '%';
+  }, 400);
+});
+
+// ── EMAIL CAPTURE ──────────────────────────────────────────
+// Submits email to Wix form endpoint
+function handleNotify() {
+  const input = document.getElementById('email-input');
+  const email = input.value.trim();
+
+  if (!email || !email.includes('@')) {
+    input.style.borderColor = 'rgba(200,0,0,0.5)';
+    input.focus();
+    setTimeout(() => input.style.borderColor = 'rgba(200,168,75,0.2)', 2000);
+    return;
+  }
+
+  // Redirect to Wix form with email pre-filled
+  const wixUrl = 'https://aeratecosystems.wixsite.com/so/17Puq_Gmi?languageTag=en&email=' + encodeURIComponent(email);
+  window.open(wixUrl, '_blank');
+
+  document.getElementById('notify-row').style.display    = 'none';
+  document.getElementById('notify-success').classList.add('show');
+}
+
+// Allow pressing Enter in the input
+document.getElementById('email-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') handleNotify();
+});
+</script>
+
+</body>
+</html>
